@@ -1,0 +1,9 @@
+[submodule "wp-content/themes/carepoint-2015/library"]
+	path = wp-content/themes/carepoint-2015/library
+	url = git@github.com:nutyga/carepoint-css-html.git
+[submodule "wp-content/plugins/wp-nested-pages"]
+	path = wp-content/plugins/wp-nested-pages
+	url = git@github.com:nutyga/wp-nested-pages.git
+[submodule "wp-nested-pages"]
+	path = wp-nested-pages
+	url = git@github.com:nutyga/wp-nested-pages.git
