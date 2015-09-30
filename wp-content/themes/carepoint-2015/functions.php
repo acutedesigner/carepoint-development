@@ -169,8 +169,8 @@ function care_advice_taxonomy_filter() {
 add_action( 'restrict_manage_posts', 'care_advice_taxonomy_filter' );
 
 function add_taxonomies_to_pages() {
- register_taxonomy_for_object_type( 'post_tag', 'page' );
- register_taxonomy_for_object_type( 'category', 'page' );
+ register_taxonomy_for_object_type( 'post_tag', 'care-advice' );
+ register_taxonomy_for_object_type( 'post_tag', 'care-services' );
  }
 add_action( 'init', 'add_taxonomies_to_pages' );
 
