@@ -15,7 +15,7 @@ get_header(); ?>
 				<p><?php echo category_description(); ?></p>
 			</div>
 			<div class="thumb-block">
-				<img src="<?php if (function_exists('z_taxonomy_image_url')) echo z_taxonomy_image_url(); ?>" />
+				<img src="<?php if (function_exists('z_taxonomy_image_url')) echo z_taxonomy_image_url(NULL, 'landscape-4x3'); ?>" />
 			</div>
 		</div>
 

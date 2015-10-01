@@ -4,8 +4,10 @@
  * Plugin URI: http://zahlan.net/blog/2012/06/categories-images/
  * Description: Categories Images Plugin allow you to add an image to category or any custom term.
  * Author: Muhammad Said El Zahlan
- * Version: 2.5
+ * Version: 2.5.1
  * Author URI: http://zahlan.net/
+ * Domain Path: /languages
+ * Text Domain: categories-images
  */
 ?>
 <?php
@@ -15,7 +17,7 @@ if (!defined('Z_PLUGIN_URL'))
 define('Z_IMAGE_PLACEHOLDER', Z_PLUGIN_URL."/images/placeholder.png");
 
 // l10n
-load_plugin_textdomain('zci', FALSE, 'categories-images/languages');
+load_plugin_textdomain('categories-images', FALSE, 'categories-images/languages');
 
 add_action('admin_init', 'z_init');
 function z_init() {
@@ -56,10 +58,10 @@ function z_add_texonomy_field() {
 	}
 	
 	echo '<div class="form-field">
-		<label for="taxonomy_image">' . __('Image', 'zci') . '</label>
+		<label for="taxonomy_image">' . __('Image', 'categories-images') . '</label>
 		<input type="text" name="taxonomy_image" id="taxonomy_image" value="" />
 		<br/>
-		<button class="z_upload_image_button button">' . __('Upload/Add image', 'zci') . '</button>
+		<button class="z_upload_image_button button">' . __('Upload/Add image', 'categories-images') . '</button>
 	</div>'.z_script();
 }
 
@@ -77,10 +79,10 @@ function z_edit_texonomy_field($taxonomy) {
 	else
 		$image_text = z_taxonomy_image_url( $taxonomy->term_id, NULL, TRUE );
 	echo '<tr class="form-field">
-		<th scope="row" valign="top"><label for="taxonomy_image">' . __('Image', 'zci') . '</label></th>
+		<th scope="row" valign="top"><label for="taxonomy_image">' . __('Image', 'categories-images') . '</label></th>
 		<td><img class="taxonomy-image" src="' . z_taxonomy_image_url( $taxonomy->term_id, NULL, TRUE ) . '"/><br/><input type="text" name="taxonomy_image" id="taxonomy_image" value="'.$image_text.'" /><br />
-		<button class="z_upload_image_button button">' . __('Upload/Add image', 'zci') . '</button>
-		<button class="z_remove_image_button button">' . __('Remove image', 'zci') . '</button>
+		<button class="z_upload_image_button button">' . __('Upload/Add image', 'categories-images') . '</button>
+		<button class="z_remove_image_button button">' . __('Remove image', 'categories-images') . '</button>
 		</td>
 	</tr>'.z_script();
 }
@@ -206,8 +208,8 @@ function z_quick_edit_custom_box($column_name, $screen, $name) {
 				<span class="title"><img src="" alt="Thumbnail"/></span>
 				<span class="input-text-wrap"><input type="text" name="taxonomy_image" value="" class="tax_list" /></span>
 				<span class="input-text-wrap">
-					<button class="z_upload_image_button button">' . __('Upload/Add image', 'zci') . '</button>
-					<button class="z_remove_image_button button">' . __('Remove image', 'zci') . '</button>
+					<button class="z_upload_image_button button">' . __('Upload/Add image', 'categories-images') . '</button>
+					<button class="z_remove_image_button button">' . __('Remove image', 'categories-images') . '</button>
 				</span>
 			</label>
 		</div>
@@ -224,7 +226,7 @@ function z_quick_edit_custom_box($column_name, $screen, $name) {
 function z_taxonomy_columns( $columns ) {
 	$new_columns = array();
 	$new_columns['cb'] = $columns['cb'];
-	$new_columns['thumb'] = __('Image', 'zci');
+	$new_columns['thumb'] = __('Image', 'categories-images');
 
 	unset( $columns['cb'] );
 
@@ -242,7 +244,7 @@ function z_taxonomy_columns( $columns ) {
  */
 function z_taxonomy_column( $columns, $column, $id ) {
 	if ( $column == 'thumb' )
-		$columns = '<span><img src="' . z_taxonomy_image_url($id, NULL, TRUE) . '" alt="' . __('Thumbnail', 'zci') . '" class="wp-post-image" /></span>';
+		$columns = '<span><img src="' . z_taxonomy_image_url($id, NULL, TRUE) . '" alt="' . __('Thumbnail', 'categories-images') . '" class="wp-post-image" /></span>';
 	
 	return $columns;
 }
@@ -262,20 +264,20 @@ if ( strpos( $_SERVER['SCRIPT_NAME'], 'edit-tags.php' ) > 0 ) {
 // New menu submenu for plugin options in Settings menu
 add_action('admin_menu', 'z_options_menu');
 function z_options_menu() {
-	add_options_page(__('Categories Images settings', 'zci'), __('Categories Images', 'zci'), 'manage_options', 'zci-options', 'zci_options');
+	add_options_page(__('Categories Images settings', 'categories-images'), __('Categories Images', 'categories-images'), 'manage_options', 'zci-options', 'zci_options');
 	add_action('admin_init', 'z_register_settings');
 }
 
 // Register plugin settings
 function z_register_settings() {
 	register_setting('zci_options', 'zci_options', 'z_options_validate');
-	add_settings_section('zci_settings', __('Categories Images settings', 'zci'), 'z_section_text', 'zci-options');
-	add_settings_field('z_excluded_taxonomies', __('Excluded Taxonomies', 'zci'), 'z_excluded_taxonomies', 'zci-options', 'zci_settings');
+	add_settings_section('zci_settings', __('Categories Images settings', 'categories-images'), 'z_section_text', 'zci-options');
+	add_settings_field('z_excluded_taxonomies', __('Excluded Taxonomies', 'categories-images'), 'z_excluded_taxonomies', 'zci-options', 'zci_settings');
 }
 
 // Settings section description
 function z_section_text() {
-	echo '<p>'.__('Please select the taxonomies you want to exclude it from Categories Images plugin', 'zci').'</p>';
+	echo '<p>'.__('Please select the taxonomies you want to exclude it from Categories Images plugin', 'categories-images').'</p>';
 }
 
 // Excluded taxonomies checkboxs
@@ -295,12 +297,12 @@ function z_options_validate($input) {
 // Plugin option page
 function zci_options() {
 	if (!current_user_can('manage_options'))
-		wp_die(__( 'You do not have sufficient permissions to access this page.', 'zci'));
+		wp_die(__( 'You do not have sufficient permissions to access this page.', 'categories-images'));
 		$options = get_option('zci_options');
 	?>
 	<div class="wrap">
 		<?php screen_icon(); ?>
-		<h2><?php _e('Categories Images', 'zci'); ?></h2>
+		<h2><?php _e('Categories Images', 'categories-images'); ?></h2>
 		<form method="post" action="options.php">
 			<?php settings_fields('zci_options'); ?>
 			<?php do_settings_sections('zci-options'); ?>
