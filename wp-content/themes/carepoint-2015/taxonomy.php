@@ -110,14 +110,17 @@ get_header(); ?>
 					<img src="<?php bloginfo("template_directory"); ?>/library/images/fpo_4x3.png" alt="4x3 Image" />
 				</div>
 	<?php } ?>
+
+				<?php if ($term_list = wp_get_post_tags($post->ID, array("fields" => "all"))): ?>
 				<div class="tag-block">
 					<small>Article tags:</small>
 					<div class="article-tags">
-						<a href="#">Health care</a>
-						<a href="#">Medicine</a>
-						<a href="#">tablets</a>
+					<?php foreach($term_list as $term): ?>
+						<a href="<?php echo get_term_link( $term ); ?>"><?php echo ucfirst($term->name); ?></a>
+					<?php endforeach; ?>
 					</div>
 				</div>	
+				<?php endif; ?>
 			</article>			
 
 	<?php endwhile; // End the loop. Whew. ?>

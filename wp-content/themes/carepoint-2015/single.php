@@ -39,12 +39,15 @@
 					</ul>
 				</div>
 
+
+				<?php if ($term_list = wp_get_post_tags($post->ID, array("fields" => "all"))): ?>
 				<h2 class="section-header">Article tags</h2>
-				<div class="article-tags">
-					<a href="#">Health care</a>
-					<a href="#">Medicine</a>
-					<a href="#">tablets</a>
-				</div>
+					<div class="article-tags">
+					<?php foreach($term_list as $term): ?>
+						<a href="<?php echo get_term_link( $term ); ?>"><?php echo ucfirst($term->name); ?></a>
+					<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 
 			<?php
 
