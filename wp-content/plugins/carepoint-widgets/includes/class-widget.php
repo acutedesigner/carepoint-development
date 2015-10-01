@@ -128,7 +128,7 @@ class CPT_Category_Block extends WP_Widget
 		$options = array( 
 		
 			'description' => 'This is for the category blocks. Please ensure you have choosen a category image',
-			'name' 	=> 'CPT_Category_Block'		
+			'name' 	=> 'Care Point Category Block'		
 		);
 		
 		parent::__construct('CPT_Category_Block','',$options);	
