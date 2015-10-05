@@ -49,6 +49,11 @@
 				e.preventDefault();
 				$('.block-form').slideToggle();
 			});
+			
+			$('.atoz-toggle').click(function(e){
+				e.preventDefault();
+				$('.block-atoz-index').slideToggle();
+			});
 
 			$('.bxslider').bxSlider({
 			  mode: 'fade',

@@ -50,9 +50,7 @@ get_header(); ?>
 
 	<?php if( $div % 3 == 0): echo '<div class="three-up-grid">'; endif; ?>
 
-	<?php if($div == 0): echo '<h2 class="section-header">Categories</h2>'; endif; ?>
-
-	<?php $term_link = get_term_link( $term ); ?> 
+	<?php if($div == 0): echo '<h2 class="section-header">Categories</h2>'; endif; ?> 
 
 		<div class="grid">
 			<div class="block block-service-link">
@@ -60,7 +58,7 @@ get_header(); ?>
 					<h2><?php echo $term->name; ?></h2>
 					<!-- <p><?php echo $term->description; ?></p> -->
 				</div>
-				<a href="<?php echo $term_link; ?>">View services <i class="fa fa-angle-double-right"></i></a>
+				<a href="<?php echo get_term_link($term); ?>">View services <i class="fa fa-angle-double-right"></i></a>
 			</div>
 		</div>
 
@@ -111,37 +109,25 @@ get_header(); ?>
 			<div class="header-block">
 				<h2><?php the_title(); ?></h2>
 				<div class="btn-group">
-					<a href="#"><i class="fa fa-plus-circle"></i></a>
-					<a href="#"><i class="fa fa-envelope-o"></i></a>
+					<a class="tooltip" title="Save to your bookmarks" href="#"><i class="fa fa-plus-circle"></i></a>
+					<a class="tooltip" title="Email these details" href="#"><i class="fa fa-envelope-o"></i></a>
 				</div>
 			</div>
 
-			<div class="two-up-grid">
-				<div class="grid">
-					<p>106a North Street,<br/> 
-					Hornchurch, Essex, RM11 1SU<br/> 
-					<strong>Tel:</strong> 01708 478712<br/> 
-					<strong>Fax:</strong> 0844 871 7023</p>
-				</div>
-				<div class="grid">
-					<p>
-						<strong>Email:</strong><br/>
-						<a href="#">hornchurch@acromashealthcare.com</a><br/>
-						<strong>Branch Manager:</strong><br/>
-						Laurence Brown
-					</p>
-				</div>		
-			</div>
-			<p>At Allied Healthcare, we care for more people at home than anyone else. We know that enabling people to continue living in the place they feel most comfortable can help them enjoy healthier, more fulfilling lives.</p>
+			<?php the_content(); ?>
 
+			<?php if ($term_list = wp_get_post_tags($post->ID, array("fields" => "all"))): ?>
 			<div class="tag-block">
 				<small>Article tags:</small>
 				<div class="article-tags">
-					<a href="#">Health care</a>
-					<a href="#">Medicine</a>
-					<a href="#">tablets</a>
+
+					
+				<?php foreach($term_list as $term): ?>
+					<a href="<?php echo atoz_letter_link($term); ?>"><?php echo ucfirst($term->name); ?></a>
+				<?php endforeach; ?>
 				</div>
 			</div>	
+			<?php endif; ?>
 		</div>
 
 	<?php endwhile; // End the loop. Whew. ?>
@@ -168,7 +154,10 @@ get_header(); ?>
 			<?php foreach($terms as $term): $term_link = get_term_link( $term ); ?>
 				<a href="<?php echo $term_link; ?>">
 					<?php echo $term->name ?>
-					<small>Services available: 9</small>
+					<small>Services available: <?php echo $term->count ?></small>
+
+					<?php 
+					 ?>
 				</a>
 			<?php endforeach; ?>
 			</div>

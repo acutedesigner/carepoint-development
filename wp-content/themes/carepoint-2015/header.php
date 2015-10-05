@@ -33,7 +33,7 @@
 					<nav class="header-nav">
 						<ul>
 							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">A to Z</a></li>
+							<li><a class="atoz-toggle" href="#">A to Z</a></li>
 							<li><a href="#">Translate</a></li>
 							<li><a class="tooltip" title="Text to speech" href="#"><i class="fa fa-volume-up"></i></a></li>		
 							<li><a class="tooltip" title="Your saved articles" href="#"><i class="fa fa-list-ul"></i></a></li>		
@@ -75,5 +75,5 @@
 					</form>
 				</div>
 			</div>
-			<!-- end .block-form-->
+			<!-- end .block-form -->
 				

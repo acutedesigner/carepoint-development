@@ -142,7 +142,7 @@ get_header(); ?>
 	?>
 
 		<section class="section related-posts">
-			<h2 class="section-header">Related articles</h2>
+			<h2 class="section-header">Related categories</h2>
 			<ul class="headline-list">
 	<?php
 			foreach($terms as $term)

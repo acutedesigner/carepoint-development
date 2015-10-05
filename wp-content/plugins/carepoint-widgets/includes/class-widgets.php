@@ -186,7 +186,12 @@ class CPT_Category_Block extends WP_Widget
 		</div>
 
 		<?php
-
 	}	
 }
 
+function cpt_register_widget() {
+	register_widget('CPT_Textbox_Widget');
+	register_widget('CPT_Category_Block');
+}
+
+add_action( 'widgets_init', 'cpt_register_widget');

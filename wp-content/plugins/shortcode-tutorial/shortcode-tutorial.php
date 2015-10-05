@@ -11,8 +11,6 @@
 
 add_shortcode('google', function($atts){
 
-
-
 	return '<a href="http://www.twitter.com/'.$atts['username'].'">Visit Google</a>';
 
 });
