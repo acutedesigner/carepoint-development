@@ -25,7 +25,6 @@
 	<!-- End Footer -->
 
 	<script src="<?php bloginfo("template_directory"); ?>/library/js/jquery.tooltipster.min.js"></script>
-	<script src="<?php bloginfo("template_directory"); ?>/library/js/modernizr.js"></script>
 	<script src="<?php bloginfo("template_directory"); ?>/library/js/bxslider/jquery.bxslider.min.js"></script>
 	<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/js/bxslider/jquery.bxslider.css" media="all" />
 	<script>

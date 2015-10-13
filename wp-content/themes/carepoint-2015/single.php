@@ -39,6 +39,8 @@
 					</ul>
 				</div>
 
+				<h2 class="section-header">Rate this article</h2>
+				<?php if(function_exists('the_ratings')) { the_ratings(); } ?>
 
 				<?php if ($term_list = wp_get_post_tags($post->ID, array("fields" => "all"))): ?>
 				<h2 class="section-header">Article tags</h2>

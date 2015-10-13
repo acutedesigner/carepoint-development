@@ -15,9 +15,11 @@
 		<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/css/main.css" media="all" />
 		<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/css/font-awesome.min.css" media="all" />	
 
+		<script src="<?php bloginfo("template_directory"); ?>/library/js/modernizr.js"></script>
+
 		<!--[if IE 8]>
 			<script src="<?php bloginfo("template_directory"); ?>/library/js/selectivizr-min.js"></script>
-			<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/css/ie.css?{{ cacheBuster }}" media="all" />
+			<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/css/ie.css" media="all" />
 		<![endif]-->
 
 		<?php wp_enqueue_script('jquery'); ?>
@@ -29,18 +31,19 @@
 
 			<header class="header" role="banner">
 				<div class="logo">
-					<a href="<?php bloginfo("url"); ?>"><img src="<?php bloginfo("template_directory"); ?>/library/images/carepoint-logo.png" alt="Care Point Logo" /></a>	</div>
-					<nav class="header-nav">
-						<ul>
-							<li><a href="#">Contact Us</a></li>
-							<li><a class="atoz-toggle" href="#">A to Z</a></li>
-							<li><a href="#">Translate</a></li>
-							<li><a class="tooltip" title="Text to speech" href="#"><i class="fa fa-volume-up"></i></a></li>		
-							<li><a class="tooltip" title="Your saved articles" href="#"><i class="fa fa-list-ul"></i></a></li>		
-							<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
-						</ul>
-					</nav>
-			</header>
+					<a href="<?php bloginfo("url"); ?>"><img src="<?php bloginfo("template_directory"); ?>/library/images/carepoint-logo.png" alt="Care Point Logo" /></a>
+				</div>
+				<nav class="header-nav">
+					<ul>
+						<li><a href="#">Contact Us</a></li>
+						<li><a class="atoz-toggle" href="#">A to Z</a></li>
+						<li><a href="#">Translate</a></li>
+						<li><a class="tooltip" title="Text to speech" href="#"><i class="fa fa-volume-up"></i></a></li>		
+						<li><a class="tooltip" title="Your saved articles" href="#"><i class="fa fa-list-ul"></i></a></li>		
+						<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
+					</ul>
+				</nav>
+		</header>
 			<!-- End .header -->
 
 			<nav class="primary-nav" id="nav">

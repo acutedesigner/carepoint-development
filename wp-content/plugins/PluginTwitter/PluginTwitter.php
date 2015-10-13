@@ -20,9 +20,7 @@ class PluginTwitter extends WP_Widget{
 		$options = array( 
 		
 			'description' => 'This is a simple Twitter Widget for Tweets',
-			'name' 	=> 'PluginTwitter'
-			
-			
+			'name' 	=> 'PluginTwitter'			
 		
 		);
 		
