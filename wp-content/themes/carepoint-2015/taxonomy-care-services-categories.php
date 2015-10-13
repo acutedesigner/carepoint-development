@@ -123,7 +123,7 @@ get_header(); ?>
 
 					
 				<?php foreach($term_list as $term): ?>
-					<a href="<?php echo atoz_letter_link($term); ?>"><?php echo ucfirst($term->name); ?></a>
+						<a href="<?php echo $carepointAtoz->get_atoz_letter_link($term->slug); ?>"><?php echo ucfirst($term->name); ?></a>
 				<?php endforeach; ?>
 				</div>
 			</div>	

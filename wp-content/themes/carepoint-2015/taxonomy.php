@@ -116,7 +116,7 @@ get_header(); ?>
 					<small>Article tags:</small>
 					<div class="article-tags">
 					<?php foreach($term_list as $term): ?>
-						<a href="<?php echo get_term_link( $term ); ?>"><?php echo ucfirst($term->name); ?></a>
+						<a href="<?php echo $carepointAtoz->get_atoz_letter_link($term->slug); ?>"><?php echo ucfirst($term->name); ?></a>
 					<?php endforeach; ?>
 					</div>
 				</div>	
