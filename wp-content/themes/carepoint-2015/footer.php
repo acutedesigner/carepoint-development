@@ -4,7 +4,7 @@
 	<!-- Begin Footer -->
 	<div class="contact-bar">
 		<div class="container">
-			<p>Get in touch with us on: <a href="tel:01234567890">01708 432 000</a> or online <a href="#" class="btn violet-grad">Feedback forms <i class="fa fa-commenting"></i></a></p>	
+			<p>Get in touch with us on: <a href="tel:01708 776770">01708 776770</a> or online <a href="#" class="btn violet-grad">Feedback forms <i class="fa fa-commenting"></i></a></p>	
 		</div>
 	</div><footer class="footer" role="contentinfo">
 		<div class="container">
