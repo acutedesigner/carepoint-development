@@ -34,14 +34,7 @@
 					<a href="<?php bloginfo("url"); ?>"><img src="<?php bloginfo("template_directory"); ?>/library/images/carepoint-logo.png" alt="Care Point Logo" /></a>
 				</div>
 				<nav class="header-nav">
-					<ul>
-						<li><a href="#">Contact Us</a></li>
-						<li><a class="atoz-toggle" href="#">A to Z</a></li>
-						<li><a href="#">Translate</a></li>
-						<li><a class="tooltip" title="Text to speech" href="#"><i class="fa fa-volume-up"></i></a></li>		
-						<li><a class="tooltip" title="Your saved articles" href="#"><i class="fa fa-list-ul"></i></a></li>		
-						<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
-					</ul>
+					<?php wp_nav_menu( array('theme_location' => 'header_menu', 'container' => 'false')); ?>
 				</nav>
 		</header>
 			<!-- End .header -->

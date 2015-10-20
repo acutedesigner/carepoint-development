@@ -22,11 +22,14 @@
 				
 			<aside class="right-column">
 
+				
+				<?php if(get_field('nhs_choices') != ""): ?>
 				<div class="nhs-choices-label">
 					<small>This article is sourced from:</small>
 					<img src="<?php bloginfo("template_url"); ?>/library/images/nhs-choices-logo.jpg" alt="NHS Choices">
 				</div>
-
+				<?php endif; ?>
+				
 				<h2 class="section-header">Save &amp; Share</h2>
 				<div class="social-share">
 					<ul>
