@@ -3,14 +3,14 @@
 /**
  * What to print in place of license code chars.
  * This must not be a symbol that is considered to be a valid license key char.
- * 
+ *
  * @since 4.6.10
  */
 define( 'WPRSS_LICENSE_KEY_MASK_CHAR', '•' );
 /**
  * How many characters of the license code to print as is.
  * Use negative value to indicate that characters at the end of the key are excluded.
- * 
+ *
  * @since 4.6.10
  */
 define( 'WPRSS_LICENSE_KEY_MASK_EXCLUDE_AMOUNT', -4 );
@@ -58,11 +58,18 @@ function wprss_edd_licensing_api( $addon, $license_key = NULL, $action = 'check_
 
 	// If the response is an error, return the value in the DB
 	if ( is_wp_error( $response ) ) {
+		wprss_log( sprintf( 'Licensing API request failed: %1$s', $response->get_error_message() ), __FUNCTION__, WPRSS_LOG_LEVEL_WARNING );
 		return $license_status;
 	}
 
 	// decode the license data
 	$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+	// Could not decode response JSON
+	if ( is_null( $license_data ) ) {
+		wprss_log( sprintf( 'Licensing API: Failed to decode response JSON' ), __FUNCTION__, WPRSS_LOG_LEVEL_WARNING );
+		return $license_status;
+	}
 
 	// Update the DB option
 	$license_statuses = get_option( 'wprss_settings_license_statuses' );
@@ -74,7 +81,7 @@ function wprss_edd_licensing_api( $addon, $license_key = NULL, $action = 'check_
 	if ( strtoupper( $return ) === 'ALL' ) {
 		return $license_data;
 	} else {
-		return $license_data->$return;
+		return isset( $license_data->{$return} ) ? $license_data->{$return} : null;
 	}
 }
 
@@ -315,6 +322,8 @@ function wprss_show_license_notice() {
 			$id = substr( $key, 0, strpos( $key, "_" ) );
 			$uid = strtoupper($id);
 
+                        $addon_notices = get_option('wprss_addon_notices');
+
 			// Check if the plugin is currently activated.
 			if ( !defined("WPRSS_{$uid}_SL_ITEM_NAME") ) {
 				continue;
@@ -322,7 +331,7 @@ function wprss_show_license_notice() {
 				$plugin = constant("WPRSS_{$uid}_SL_ITEM_NAME");
 			}
 
-			if ( $expires < strtotime("+2 weeks") ) {
+                        if ( $expires < strtotime("+2 weeks") && empty ( $addon_notices[$id]['expiry'] ) ) {
 				// The license is expired or expiring soon.
 				$license_key = wprss_get_license_key($id);
 				$msg = sprintf(
@@ -332,7 +341,7 @@ function wprss_show_license_notice() {
 				);
 
 				// User can hide expiring/expired license messages.
-				$hide = '<a href="#" class="ajax-close-addon-notice" style="float:right;" data-addon="categories" data-notice="license">' .
+				$hide = '<a href="#" class="ajax-close-addon-notice" style="float:right;" data-addon="'. $id .'" data-notice="expiry">' .
 					__('Dismiss this notification', WPRSS_TEXT_DOMAIN) . '</a>';
 
 				// Only show this notice if there isn't already a notice to show for this add-on.
@@ -698,13 +707,15 @@ function wprss_process_addon_license() {
 }
 
 
-add_action( 'init', 'wprss_setup_edd_updater' );
+add_action( 'admin_init', 'wprss_setup_edd_updater' );
 /**
  * Sets up the EDD updater for all registered add-ons.
  *
  * @since 4.6.3
  */
 function wprss_setup_edd_updater() {
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) return;
+
 	// Get all registered addons
 	$addons = wprss_get_addons();
 
@@ -740,7 +751,7 @@ add_filter( 'wprss_settings_license_key_is_valid', 'wprss_license_validate_key_f
 /**
  * Invalidates the key if it is obfuscated, causing the saved version to be used.
  * This meanst that the new key will not be saved, as it is considered then to be unchanged.
- * 
+ *
  * @since 4.6.10
  * @param bool $is_valid Indicates whether the key is currently considered to be valid.
  * @param string $key The license key in question
@@ -749,18 +760,18 @@ add_filter( 'wprss_settings_license_key_is_valid', 'wprss_license_validate_key_f
 function wprss_license_validate_key_for_save( $is_valid, $key ) {
 	if ( wprss_license_key_is_obfuscated( $key ) )
 		return false;
-	
+
 	return $is_valid;
 }
 
 
 /**
  * Determines whether or not the license key in question is obfuscated.
- * 
+ *
  * This is achieved by searching for the mask character in the key. Because the
  * mask character cannot be a valid license character, the presence of at least
  * one such character indicates that the key is obfuscated.
- * 
+ *
  * @since 4.6.10
  * @param string $key The license key in question.
  * @return bool Whether or not this key is obfuscated.

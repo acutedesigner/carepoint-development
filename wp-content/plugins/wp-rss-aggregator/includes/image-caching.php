@@ -383,7 +383,7 @@ class WPRSS_Image_Cache {
 	public function is_valid_url( $url ) {
 		$url = trim( $url );
 		$protocol_regex = '^([a-z][\w-]+:)?//';
-		return !is_object() && preg_match( $protocol_regex, $url ) && wprss_validate_url( $url );
+		return !is_object( $url ) && preg_match( sprintf( '!%1$s!', $protocol_regex ), $url ) && wprss_validate_url( $url );
 	}
 
 
@@ -543,7 +543,7 @@ class WPRSS_Image_Cache {
 		$hash_funcs = apply_filters( 'wprss_image_cache_hash_functions', array( 'sha1', 'md5' ) );
 		foreach ( $hash_funcs as $_idx => $_func )
 			if ( is_callable( $_func ) )
-				return call_user_func_array ( $_func, array( $url_filename ) );
+				return call_user_func_array ( $_func, array( $value ) );
 
 		return $default;
 	}
@@ -584,11 +584,19 @@ class WPRSS_Image_Cache {
 		// In case the URL is specified with a relative protocol
 		$url = ltrim( $url, '/' );
 
-		// Extract filename from url for title (ignoring query string)
-		// One of more character that is not a '?', followed by an image extension
-		preg_match( '/[^\?]+\.(jpg|JPG|jpeg|JPEG|jpe|JPE|gif|GIF|png|PNG)/', $url, $ext_matches );
+		// Validate and extract extension from URL
+        $pattern =
+              '[^\?#]+?' // Anything that's not a '?' or '#', which denote the query string and fragment respectively
+            . '(?:' // Non-matching group, just for quantifier
+                . '\.' // Literal period
+                . '(jpg|JPG|jpeg|JPEG|jpe|JPE|gif|GIF|png|PNG)' // The actual extension; this is what we're after
+            . ')?' // The extension may not appear at all
+            . '(?:#|\?|$)' // End our search with query or fragment
+        ;
+		preg_match( sprintf( '!%1$s!', $pattern ), $url, $ext_matches );
 		$extension = isset( $ext_matches[1] ) ? $ext_matches[1] : null;
-		$url_filename = basename( urldecode( $ext_matches[0] ) );
+        // Fragment/query delimiters are included in the whole match
+		$url_filename = basename( urldecode( trim( $ext_matches[0], '#?' ) ) );
 
 		// Get the path to the image, without the domain. ex. /news/132456/image
 		$path_matches = array();
@@ -602,7 +610,7 @@ class WPRSS_Image_Cache {
 
 		$base_filename = $extension
 			? basename( $url_filename, '.' . $extension )
-			: $url_filename;
+			: basename( $url_filename );
 
 		if ( $hash = self::hash( $url ) )
 			$base_filename = $base_filename . '-' .$hash;
