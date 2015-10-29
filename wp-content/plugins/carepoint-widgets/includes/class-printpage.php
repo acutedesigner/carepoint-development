@@ -42,7 +42,6 @@ class carepointPrintPage
 
 		if( get_query_var('cppp_post_id') && !wp_verify_nonce( get_query_var('nonce'), "cp_printpage_nonce"))
 		{
-			get_header('print');
 			include(CPT_PLUGIN_DIR . '/views/' . 'cppp-layout.php');
 			exit();
 		}
