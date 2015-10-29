@@ -33,8 +33,8 @@
 				<h2 class="section-header">Save &amp; Share</h2>
 				<div class="social-share">
 					<ul>
-						<li><a class="tooltip" title="Save this article" href="{{ url }}"><i class="fa fa-plus-circle"></i></a></li>
-						<li><a class="tooltip" title="Print this article" href="{{ url }}"><i class="fa fa-print"></i></a></li>
+						<?php cp_savearticle_button($post->ID); ?>
+						<?php cp_printpage_button($post->ID); ?>
 						<?php cp_ttpdf_button($post->ID); ?>
 						<li><a class="tooltip" title="Email this article" href="{{ url }}"><i class="fa fa-envelope-o"></i></a></li>
 						<li><a class="tooltip" title="Share on Facebook" href="{{ url }}"><i class="fa fa-facebook"></i></a></li>
@@ -49,7 +49,7 @@
 				<h2 class="section-header">Article tags</h2>
 					<div class="article-tags">
 					<?php foreach($term_list as $term): ?>
-						<a href="<?php echo $carepointAtoz->get_atoz_letter_link($term->slug); ?>"><?php echo ucfirst($term->name); ?></a>
+						<a target="blank" href="<?php echo get_atoz_letter_link($term->slug); ?>"><?php echo ucfirst($term->name); ?></a>
 					<?php endforeach; ?>
 					</div>
 				<?php endif; ?>

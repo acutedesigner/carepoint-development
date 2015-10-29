@@ -23,3 +23,16 @@ require_once CPT_PLUGIN_DIR . 'includes/class-widgets.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-breadcrumbs.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-atoz.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-texttopdf.php';
+require_once CPT_PLUGIN_DIR . 'includes/class-printpage.php';
+require_once CPT_PLUGIN_DIR . 'includes/class-savearticle.php';
+
+//Enqeue the Javascript that will be required
+function cp_javascript()
+{
+
+	wp_register_script('carepoint_script', plugins_url('assets/cpt-script.js', __FILE__), array('jquery'),'1.1', true);
+	wp_enqueue_script('carepoint_script');
+
+}
+
+add_action( 'wp_enqueue_scripts', 'cp_javascript' );

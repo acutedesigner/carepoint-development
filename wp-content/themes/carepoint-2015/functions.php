@@ -56,12 +56,12 @@ add_filter( 'wp_postratings_image_extension', 'custom_rating_image_extension' );
 
 //------ DEBUGGING ------//
 
-// function inspect_wp_query() 
-// {
-//   echo '<pre>';
-//     print_r($GLOBALS['wp_query']);
-//   echo '</pre>';
-// }
+function inspect_wp_query() 
+{
+  echo '<pre>';
+    print_r($GLOBALS['wp_query']);
+  echo '</pre>';
+}
 
 // // If you're looking at other variables you might need to use different hooks
 // // this can sometimes be a little tricky.

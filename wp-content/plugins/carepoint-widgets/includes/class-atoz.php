@@ -64,17 +64,6 @@ class carepointAtoz
 		}
 	}
 
-	function get_atoz_letter_link($term)
-	{
-		// Get the first letter of term
-		$term_first_letter = substr($term, 0, 1);
-
-		// Create the link 
-		$term_link = get_site_url().'/tag/'.$term_first_letter.'/'.$term;
-
-		// return the link
-		return $term_link;
-	}	
 }
 
 $carepointAtoz = new carepointAtoz;
