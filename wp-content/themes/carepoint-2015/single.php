@@ -35,7 +35,7 @@
 					<ul>
 						<li><a class="tooltip" title="Save this article" href="{{ url }}"><i class="fa fa-plus-circle"></i></a></li>
 						<li><a class="tooltip" title="Print this article" href="{{ url }}"><i class="fa fa-print"></i></a></li>
-						<li><a class="tooltip" title="Download article to PDF" href="{{ url }}"><i class="fa fa-file-pdf-o"></i></a></li>
+						<?php cp_ttpdf_button($post->ID); ?>
 						<li><a class="tooltip" title="Email this article" href="{{ url }}"><i class="fa fa-envelope-o"></i></a></li>
 						<li><a class="tooltip" title="Share on Facebook" href="{{ url }}"><i class="fa fa-facebook"></i></a></li>
 						<li><a class="tooltip" title="Share on Twitter" href="{{ url }}"><i class="fa fa-twitter"></i></a></li>

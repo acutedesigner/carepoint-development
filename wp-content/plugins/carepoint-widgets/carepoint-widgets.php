@@ -22,3 +22,4 @@ require_once CPT_PLUGIN_DIR . 'includes/class-widgets.php';
 //Load up custom classes
 require_once CPT_PLUGIN_DIR . 'includes/class-breadcrumbs.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-atoz.php';
+require_once CPT_PLUGIN_DIR . 'includes/class-texttopdf.php';
