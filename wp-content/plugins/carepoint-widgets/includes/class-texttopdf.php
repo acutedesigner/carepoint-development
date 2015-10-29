@@ -82,7 +82,7 @@ class carepointTextToPDF
 		$pdf->AddPage();
 
 		// output the HTML content
-		$pdf->writeHTML('<h1>'.$this->post_title.'</h1>'.$this->post_content, true, false, true, false, '');
+		$pdf->writeHTML('<h1>'.$this->post_title.'</h1>'.apply_filters('the_content', $this->post_content), true, false, true, false, '');
 
 		// reset pointer to the last page
 		$pdf->lastPage();
