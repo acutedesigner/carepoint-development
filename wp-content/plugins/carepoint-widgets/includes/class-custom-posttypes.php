@@ -42,6 +42,7 @@ function care_advice() {
 		'publicly_queryable'  => true,
 		'capability_type'     => 'page',
 	);
+	
 	register_post_type( 'care-advice', $args );
 
 }

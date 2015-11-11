@@ -34,9 +34,11 @@
 					<a href="<?php bloginfo("url"); ?>"><img src="<?php bloginfo("template_directory"); ?>/library/images/carepoint-logo.png" alt="Care Point Logo" /></a>
 				</div>
 				<nav class="header-nav">
+					<script type="text/javascript">var _baLocale = 'uk', _baUseCookies = true, _baMode = '<?php bloginfo("template_directory"); ?>/library/images/cp-browsealoud-logo.jpg', _baHiddenMode = false, _baHideOnLoad = false;</script>
+					<script type="text/javascript" src="//www.browsealoud.com/plus/scripts/ba.js"></script>
 					<?php wp_nav_menu( array('theme_location' => 'header_menu', 'container' => 'false')); ?>
 				</nav>
-		</header>
+			</header>
 			<!-- End .header -->
 
 			<nav class="primary-nav" id="nav">
@@ -54,16 +56,18 @@
 
 			<div class="block-form">
 				<div class="container">
-					<form action="#">
+					<form role="search" method="get" action="">
 						<div class="search-form-select">
 							<label>I am looking for:</label>
-							<select class="select-style" name="" id="">
-								<option value="2">Care Advice</option>
-								<option value="1">Care Services</option>
+							<select class="select-style" name="post_type" id="">
+								<option value="care-advice">Care Advice</option>
+								<option value="care-services">Care Services</option>
 							</select>
+						
+							<input type="hidden" name="post_type" value="care-services" />
 						</div>
 						<div class="search-form-input">
-							<input type="search" name="" placeholder="Your search term">
+							<input type="search" name="s" id="s" placeholder="Your search term">
 						</div>
 						<div class="search-form-submit">
 							<input type="submit" class="btn red-grad" value="Search">
