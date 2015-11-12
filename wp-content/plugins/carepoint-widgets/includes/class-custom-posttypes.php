@@ -194,29 +194,3 @@ function care_services_categories() {
 
 }
 add_action( 'init', 'care_services_categories', 0 );
-
-
-//------ WIDGETS ------//
-
-function carepoint_widgets() {
-
-	register_sidebar( array(
-		'name'          => 'Homepage Text blocks',
-		'id'            => 'homepage_text_blocks',
-		'before_widget' => '<div>',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="rounded">',
-		'after_title'   => '</h2>',
-	) );
-
-	register_sidebar( array(
-		'name'          => 'Homepage Category blocks',
-		'id'            => 'homepage_category_blocks',
-		'before_widget' => '<div>',
-		'after_widget'  => '</div>',
-		'before_title'  => '<h2 class="rounded">',
-		'after_title'   => '</h2>',
-	) );
-
-}
-add_action( 'widgets_init', 'carepoint_widgets' );

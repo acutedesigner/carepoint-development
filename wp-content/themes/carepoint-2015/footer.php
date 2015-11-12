@@ -56,7 +56,8 @@
 
 			$('.bxslider').bxSlider({
 			  mode: 'fade',
-			  captions: true
+			  captions: true,
+			  controls: false
 			});
 
 			//------ TOOLTIPS ------//

@@ -1,10 +1,9 @@
 <?php get_header(); ?>
+
 	<!-- FOR CAROUSEL -->
 	<div class="container">
 		<ul class="bxslider">
-			<li><img src="<?php bloginfo('template_url'); ?>/library/images/slider-image-1.jpg" /></li>
-			<li><img src="<?php bloginfo('template_url'); ?>/library/images/slider-image-2.jpg" /></li>
-			<li><img src="<?php bloginfo('template_url'); ?>/library/images/slider-image-3.jpg" /></li>
+			<?php dynamic_sidebar( 'homepage_carousel_items' ); ?>
 		</ul>
 	</div>
 

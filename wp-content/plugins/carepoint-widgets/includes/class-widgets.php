@@ -189,9 +189,147 @@ class CPT_Category_Block extends WP_Widget
 	}	
 }
 
+class CPT_Homepage_Carousel extends WP_Widget
+{
+	function __construct()
+	{	
+		$options = array( 
+		
+			'description' => 'This allows you to select items for the Homepage carousel.',
+			'name' 	=> 'Care Point Homepage carousel'		
+		);
+		
+		parent::__construct('CPT_Homepage_Carousel','',$options);	
+	}
+
+	function form($instance)
+	{
+		
+		extract($instance);
+		//$instance = wp_parse_args((array) $instance, array('link1' => '', 'link2' => ''));
+		$link1 = $instance['link1'];
+		$images = new WP_Query( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'post_mime_type' => 'image' , 'posts_per_page' => -1 ) );
+		
+		if( $images->have_posts() )
+		{
+
+			$options = array();
+			for( $i = 0; $i < 2; $i++ )
+			{
+				$options[$i] = '';
+				while( $images->have_posts() )
+				{
+					$images->the_post();
+					$img_src = wp_get_attachment_image_src(get_the_ID(), "full");
+					$the_link = ( $i == 0 ) ? $link1 : $link2;
+					$options[$i] .= '<option value="' . $img_src[0] . '" ' . selected( $the_link, $img_src[0], false ) . '>' . get_the_title() . '</option>';
+				} 
+			} ?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php _e( 'Select image:' ); ?></label>
+			<select name="<?php echo $this->get_field_name( 'image' ); ?>"><?php echo $options[0]; ?></select>
+		</p>
+	
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+			<input	class="widefat"
+					id="<?php echo $this->get_field_id( 'title' ); ?>"
+					name="<?php echo $this->get_field_name( 'title' ); ?>"
+					type="text"
+					value="<?php if(isset($title)) echo esc_attr( $title ); ?>"
+			>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'content' ); ?>"><?php _e( 'Content:' ); ?></label>
+			<textarea name="<?php echo $this->get_field_name( 'content' ); ?>"
+					  id="<?php echo $this->get_field_id( 'content' ); ?>"
+					  rows="10" class="widefat"><?php if(isset($content)) echo esc_attr( $content ); ?></textarea>
+		</p>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'link' ); ?>"><?php _e( 'Link:' ); ?></label>
+			<input	class="widefat"
+					id="<?php echo $this->get_field_id( 'link' ); ?>"
+					name="<?php echo $this->get_field_name( 'link' ); ?>"
+					type="text"
+					value="<?php if(isset($link)) echo esc_attr( $link ); ?>"
+			>			
+		</p>
+
+		<?php
+		}
+		else
+		{
+			echo 'There are no images in the media library. Click <a href="' . admin_url('/media-new.php') . '" title="Add Images">here</a> to add some images';
+		}
+	}
+
+	// function update( $new_instance, $old_instance ) {
+	// 	// processes widget options to be saved
+	// 	$instance = $old_instance;
+	// 	$instance['link1'] = $new_instance['link1'];
+	// 	return $instance;
+	// }
+
+	function widget($args,$instance)
+	{
+		extract($instance);
+
+	?>
+
+		<li>
+			<img src="<?php echo $image; ?>" />
+			<div class="textblock">
+				<h2><?php echo $title; ?></h2>
+				<p><?php echo $content; ?></p>
+				<a href="<?php echo $link; ?>" class="btn violet-grad">Read more</a>
+			</div>
+		</li>
+
+	<?php
+	}
+}
+
 function cpt_register_widget() {
 	register_widget('CPT_Textbox_Widget');
 	register_widget('CPT_Category_Block');
+	register_widget('CPT_Homepage_Carousel');
 }
 
 add_action( 'widgets_init', 'cpt_register_widget');
+
+
+//------ WIDGETS ------//
+
+function carepoint_widgets() {
+
+	register_sidebar( array(
+		'name'          => 'Homepage Carousel Items',
+		'id'            => 'homepage_carousel_items',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Homepage Text blocks',
+		'id'            => 'homepage_text_blocks',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+	register_sidebar( array(
+		'name'          => 'Homepage Category blocks',
+		'id'            => 'homepage_category_blocks',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h2 class="rounded">',
+		'after_title'   => '</h2>',
+	) );
+
+}
+add_action( 'widgets_init', 'carepoint_widgets' );
