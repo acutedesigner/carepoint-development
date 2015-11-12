@@ -54,6 +54,8 @@
 			</nav>
 			<!-- end .nav-->
 
+			<?php get_atoz_menu(); ?>
+			
 			<div class="block-form">
 				<div class="container">
 					<form role="search" method="get" action="">

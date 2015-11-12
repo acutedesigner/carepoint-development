@@ -45,11 +45,9 @@ class carepointAtoz
 
 	public static function atoz_catch_form()
 	{
-
 		if( get_query_var('letter') && get_query_var('term') )
 		{
 			get_header();
-			include(CPT_PLUGIN_DIR . '/views/' . 'atoz-menu.php');
 			include(CPT_PLUGIN_DIR . '/views/' . 'atoz-terms-posts.php');
 			get_footer();
 			exit();
@@ -57,7 +55,6 @@ class carepointAtoz
 		else if( get_query_var( 'letter' ) )
 		{
 			get_header();
-			include(CPT_PLUGIN_DIR . '/views/' . 'atoz-menu.php');
 			include(CPT_PLUGIN_DIR . '/views/' . 'atoz-terms.php');
 			get_footer();
 			exit();
@@ -68,6 +65,13 @@ class carepointAtoz
 
 $carepointAtoz = new carepointAtoz;
 
+}
+
+$show_atoz = TRUE;
+
+function get_atoz_menu()
+{
+	include(CPT_PLUGIN_DIR . '/views/' . 'atoz-menu.php');
 }
 
 function get_atoz_letter_link($term)

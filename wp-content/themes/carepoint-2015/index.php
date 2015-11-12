@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 	<!-- FOR CAROUSEL -->
-	<div class="container">
+	<div class="carousel">
 		<ul class="bxslider">
 			<?php dynamic_sidebar( 'homepage_carousel_items' ); ?>
 		</ul>
