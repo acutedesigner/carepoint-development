@@ -58,7 +58,6 @@ function the_breadcrumb()
 			$single_terms = get_the_terms( $post->ID, 'care-advice-categories' );
 
 			foreach ($single_terms as $term) {
-
 				// We want the get the reffering page
 				// use array filter to remove empty items
 				$url = array_filter(explode("/", $_SERVER["HTTP_REFERER"]));
@@ -70,12 +69,6 @@ function the_breadcrumb()
 				if($term->slug == $url)
 				{
 					get_taxonomy_parents($term->parent, $term->taxonomy);
-					echo '<li><a href="'.get_term_link( $term ).'">'.$term->name.'</a></li>';
-				}
-				else
-				{
-					// !NOTE only show the first result from the link
-					// This is to cover reffers from external links
 					echo '<li><a href="'.get_term_link( $term ).'">'.$term->name.'</a></li>';
 					break;
 				}
