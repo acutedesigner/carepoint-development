@@ -10,7 +10,7 @@
 			?>
 		</ul>
 		<form action="">
-			<select class="select-style" name="atoz" id="">
+			<select class="select-style" name="atoz" id="atoz-select">
 				<option>Search the A to Z index</option>
 				<?php 
 					foreach (range('a', 'z') as $letter)

@@ -123,6 +123,7 @@ function care_advice_categories() {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
+		'query_var'					 => true,
 	);
 	register_taxonomy( 'care-advice-categories', array( 'care-advice' ), $args );
 
@@ -189,6 +190,7 @@ function care_services_categories() {
 		'show_admin_column'          => true,
 		'show_in_nav_menus'          => true,
 		'show_tagcloud'              => true,
+		'query_var'					 => true,
 	);
 	register_taxonomy( 'care-services-categories', array( 'care-services' ), $args );
 

@@ -73,7 +73,7 @@ get_header(); ?>
 
 	<!-- end of .three-up-grid -->
 
-	<?php endif; ?>
+	<?php endif; // endif $terms; ?>
 
 	<?php
 

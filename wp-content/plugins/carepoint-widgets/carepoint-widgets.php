@@ -26,13 +26,18 @@ require_once CPT_PLUGIN_DIR . 'includes/class-texttopdf.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-printpage.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-savearticle.php';
 
-//Enqeue the Javascript that will be required
-function cp_javascript()
-{
 
-	wp_register_script('carepoint_script', plugins_url('assets/cpt-script.js', __FILE__), array('jquery'),'1.1', true);
-	wp_enqueue_script('carepoint_script');
+// Register the script
+wp_register_script('carepoint_script', plugins_url('assets/cpt-script.js', __FILE__), array('jquery'),'1.1', true);
 
-}
+// Localize the script with new data
+// To make it easy for JS to access website URLs ^_^
+$site_parameters = array(
+    'site_url' => get_site_url(),
+    'theme_directory' => get_template_directory_uri()
+    );
 
-add_action( 'wp_enqueue_scripts', 'cp_javascript' );
+wp_localize_script( 'carepoint_script', 'object_name', $site_parameters );
+
+// Enqueued script with localized data.
+wp_enqueue_script( 'carepoint_script' );

@@ -16,5 +16,9 @@ jQuery( function( $ )
 
 	});
 
+	// Function for the A to Z select menu
+	$( "#atoz-select" ).change(function() {
+		window.location.href = object_name.site_url + "/tag/" + $(this).val();
+	});
 
 });

@@ -54,6 +54,21 @@ add_filter( 'wp_postratings_image_extension', 'custom_rating_image_extension' );
 //         print_r($post_types);
 // });
 
+// add_filter( 'nav_menu_link_attributes', 'add_active_class', 10, 3 );
+
+// function add_active_class( $atts, $item, $args ) {
+// 	if($item->type == 'taxonomy' && is_tax())
+// 	{
+// 		$url = array_filter(explode("/", $_SERVER["REQUEST_URI"])); // use array filter to remove empty values
+// 		$url = array_pop($url);
+// 		$category = get_the_category($url);
+// 		printme($category);		
+// 		$atts['class'] = 'active';
+// 	}
+// 		return $atts;
+// }
+
+
 //------ DEBUGGING ------//
 
 function inspect_wp_query() 
@@ -69,9 +84,9 @@ function inspect_wp_query()
 // add_action( 'shutdown', 'inspect_wp_query', 999 ); // Query on public facing pages
 // add_action( 'admin_footer', 'inspect_wp_query', 999 ); // Query in admin UI
 
-// function printme($array)
-// {
-// 	echo '<pre>';
-// 		print_r($array);
-// 	echo '</pre>';	
-// }
+function printme($array)
+{
+	echo '<pre>';
+		print_r($array);
+	echo '</pre>';	
+}
