@@ -86,7 +86,7 @@
 
 			<?php } wp_reset_postdata(); ?>
 
-
+<!--
 				<h2 class="section-header">Related directory services</h2>
 				<div class="directory-service-list">
 					<a href="">
@@ -98,6 +98,7 @@
 						<small>Services available: 29</small>
 					</a>
 				</div>
+-->
 
 			</aside>
 

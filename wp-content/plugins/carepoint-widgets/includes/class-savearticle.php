@@ -70,7 +70,7 @@ function cp_savearticle_button($post_id)
 {
 	$nonce = wp_create_nonce("cp_savearticle_nonce");
 	$link = admin_url('admin-ajax.php?action=cp_savearticle&post_id='.$post_id.'&nonce='.$nonce);
-	echo '<li><a class="cp_savearticle_button tooltip" title="Save this article" href="' . $link . '"><i class="fa fa-plus-circle"></i></a></li>';
+	echo '<li><a class="cp_savearticle_button tooltip" title="Save this article" href="' . $link . '" data-post-id="'.$post_id.'"><i class="fa fa-plus-circle"></i></a></li>';
 }
 
 }

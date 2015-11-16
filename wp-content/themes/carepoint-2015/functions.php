@@ -68,6 +68,36 @@ add_filter( 'wp_postratings_image_extension', 'custom_rating_image_extension' );
 // 		return $atts;
 // }
 
+function my_searchwp_results( $results, $attributes ) {
+	
+	// available $attributes are:
+	//
+	//    $attributes['terms']          the search terms
+	//    $attributes['page']           the current page
+	//    $attributes['order']          the results order
+	//    $attributes['foundPosts']     the number of found posts
+	//    $attributes['maxNumPages']    the total number of pages of results
+	//    $attributes['engine']         the engine in use
+	
+	// modify $results in any way you'd like
+
+	global $searchwp_categories;
+
+	foreach ($results as $result) {
+    	$cats = get_the_terms( $result->ID, $result->post_type.'-categories' );
+		foreach ($cats as $cat) {
+			printme($cat);
+			$searchwp_categories[$cat->name] = true;
+		}
+    }
+
+    $searchwp_categories = array_keys($searchwp_categories);
+    sort($searchwp_categories);
+
+	return $results;
+}
+add_filter( 'searchwp_results', 'my_searchwp_results', 10, 2 );
+
 
 //------ DEBUGGING ------//
 

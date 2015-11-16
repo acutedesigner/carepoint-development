@@ -106,15 +106,10 @@ get_header(); ?>
 	?>
 
 		<div class="block block-directory-service">
-			<div class="header-block">
-				<h2><?php the_title(); ?></h2>
-				<div class="btn-group">
-					<a class="tooltip" title="Save to your bookmarks" href="#"><i class="fa fa-plus-circle"></i></a>
-					<a class="tooltip" title="Email these details" href="#"><i class="fa fa-envelope-o"></i></a>
+				<div class="text-block">
+					<h2 class="b-title"><a href="<?php the_permalink(); ?>" class="b-inner"><?php the_title(); ?></a></h2>
+					<p><?php the_excerpt(); ?></p>
 				</div>
-			</div>
-
-			<?php the_content(); ?>
 
 			<?php if ($term_list = wp_get_post_tags($post->ID, array("fields" => "all"))): ?>
 			<div class="tag-block">
@@ -123,7 +118,7 @@ get_header(); ?>
 
 					
 				<?php foreach($term_list as $term): ?>
-						<a href="<?php echo $carepointAtoz->get_atoz_letter_link($term->slug); ?>"><?php echo ucfirst($term->name); ?></a>
+						<a href="<?php echo get_atoz_letter_link($term->slug); ?>"><?php echo ucfirst($term->name); ?></a>
 				<?php endforeach; ?>
 				</div>
 			</div>	
@@ -140,7 +135,7 @@ get_header(); ?>
 		$args = array(
 		    'orderby'           => 'name', 
 		    'order'             => 'ASC',
-		    'hide_empty'        => false, 
+		    // 'hide_empty'        => false, 
 		    'child_of'          => $current_category->parent
 		); 
 

@@ -14,6 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define("CPT_VERSION_NUMBER", "0.1");
 define("CPT_PLUGIN_DIR", plugin_dir_path(__FILE__)); 
 
+// Setup db table name
+global $wpdb;
+$wpdb->cp_save_article = $wpdb->prefix.'cp_save_article';
+
+
 //Load up the classes for wordpress
 require_once CPT_PLUGIN_DIR . 'includes/class-custom-posttypes.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-shortcodes.php';
@@ -41,3 +46,24 @@ wp_localize_script( 'carepoint_script', 'object_name', $site_parameters );
 
 // Enqueued script with localized data.
 wp_enqueue_script( 'carepoint_script' );
+
+// Activate plugin
+register_activation_hook( __FILE__, 'carepoint_activation' );
+function carepoint_activation()
+{
+	global $wpdb;
+
+	// Create Post Ratings Table
+	$create_sql = "CREATE TABLE $wpdb->cp_save_article (".
+					"cp_sa_id int(11) NOT NULL AUTO_INCREMENT,".
+					"cp_sa_postid int(11) NOT NULL,".
+					"cp_sa_posttitle text NOT NULL,".
+					"cp_sa_timestamp varchar(15) NOT NULL,".
+					"cp_sa_ip varchar(40) NOT NULL,".
+					"PRIMARY KEY (cp_sa_id))";
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $create_sql );
+
+	add_option( 'carepoint_functions', CPT_VERSION_NUMBER );
+}

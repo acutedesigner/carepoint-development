@@ -56,14 +56,14 @@
 
 			<?php get_atoz_menu(); ?>
 			
-			<div class="block-form">
+			<div class="block-form" <?php echo ( is_search() ? 'style="display: block;"' : NULL ); ?>>
 				<div class="container">
 					<form role="search" method="get" action="">
 						<div class="search-form-select">
 							<label>I am looking for:</label>
-							<select class="select-style" name="post_type" id="">
-								<option value="care-advice">Care Advice</option>
-								<option value="care-services">Care Services</option>
+							<select class="select-style" name="search_type" id="">
+								<option value="care_advice">Care Advice</option>
+								<option value="care_services">Care Services</option>
 							</select>
 						
 							<input type="hidden" name="post_type" value="care-services" />
