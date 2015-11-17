@@ -62,7 +62,9 @@
 
 			//------ TOOLTIPS ------//
 			
-			$('.tooltip').tooltipster();
+			$('.tooltip').tooltipster({
+				multiple:true
+			});
 
 			function last_child() {
 				if ($.browser.msie && parseInt($.browser.version, 10) <= 8) {

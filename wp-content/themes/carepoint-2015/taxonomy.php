@@ -91,7 +91,21 @@ get_header(); ?>
 
 	<?php
 
-		while ( have_posts() ) : the_post();
+		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+		$category = get_query_var('care-advice-categories');
+		$args = array('paged' => $paged, 'care-advice-categories' => $category );
+
+		$cp_query = new WP_Query( $args );
+
+		global $wp_query;
+		// Put default query object in a temp variable
+		$tmp_query = $wp_query;
+		// Now wipe it out completely
+		$wp_query = null;
+		// Re-populate the global with our custom query
+		$wp_query = $cp_query;
+
+		while ( $cp_query->have_posts() ) : $cp_query->the_post();
 
 		// Setup the class if the post has a thumbnail image
 		$class = (has_post_thumbnail() ? "block-article-image" : "block-article");
@@ -124,7 +138,12 @@ get_header(); ?>
 			</article>			
 
 	<?php endwhile; // End the loop. Whew. ?>
-
+	<?php kriesi_pagination(); ?>
+	<?php wp_reset_postdata(); ?>
+	<?php // Restore original query object
+			$wp_query = null;
+			$wp_query = $tmp_query;
+	?>
 
 		</div><!-- end of .left-column -->
 		<div class="right-column">

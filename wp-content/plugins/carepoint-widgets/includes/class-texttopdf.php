@@ -104,7 +104,7 @@ function cp_ttpdf()
 	$carepointTextToPDF = new carepointTextToPDF;
 }
 
-add_action("wp_ajax_cp_ttpdf", "cp_ttpdf");
+add_action("wp_ajax_nopriv_cp_ttpdf", "cp_ttpdf");
 
 
 /**

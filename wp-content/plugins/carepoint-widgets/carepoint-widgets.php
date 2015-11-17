@@ -32,17 +32,18 @@ require_once CPT_PLUGIN_DIR . 'includes/class-printpage.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-savearticle.php';
 
 
-// Register the script
+// Register javascript
 wp_register_script('carepoint_script', plugins_url('assets/cpt-script.js', __FILE__), array('jquery'),'1.1', true);
 
 // Localize the script with new data
 // To make it easy for JS to access website URLs ^_^
 $site_parameters = array(
     'site_url' => get_site_url(),
+    'ajax_url' => admin_url( 'admin-ajax.php' ),
     'theme_directory' => get_template_directory_uri()
     );
 
-wp_localize_script( 'carepoint_script', 'object_name', $site_parameters );
+wp_localize_script( 'carepoint_script', 'wp_js_object', $site_parameters );
 
 // Enqueued script with localized data.
 wp_enqueue_script( 'carepoint_script' );

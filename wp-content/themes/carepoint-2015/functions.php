@@ -71,11 +71,14 @@ add_filter( 'wp_postratings_image_extension', 'custom_rating_image_extension' );
 function my_searchwp_results( $results, $attributes ) {
 	
 	global $searchwp_categories;
+	global $searchwp_result_count;
+
+	$searchwp_result_count = $attributes['foundPosts'];
 
 	foreach ($results as $result) {
     	$cats = get_the_terms( $result->ID, $result->post_type.'-categories' );
 
-		foreach ($cats as $cat) {
+		foreach ((array)$cats as $cat) {
 
 			$searchwp_categories[$cat->name] = array(
 					'cat-name' => $cat->name,
@@ -91,6 +94,43 @@ function my_searchwp_results( $results, $attributes ) {
 }
 add_filter( 'searchwp_results', 'my_searchwp_results', 10, 2 );
 
+
+function kriesi_pagination($pages = '', $range = 2)
+{  
+     $showitems = ($range * 2)+1;  
+
+     global $paged;
+     if(empty($paged)) $paged = 1;
+
+     if($pages == '')
+     {
+         global $wp_query;
+         $pages = $wp_query->max_num_pages;
+         if(!$pages)
+         {
+             $pages = 1;
+         }
+     }   
+
+     if(1 != $pages)
+     {
+         echo "<div class='pagination'>";
+         if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo;</a>";
+         if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo;</a>";
+
+         for ($i=1; $i <= $pages; $i++)
+         {
+             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
+             {
+                 echo ($paged == $i)? "<span class='current'>".$i."</span>":"<a href='".get_pagenum_link($i)."' class='inactive' >".$i."</a>";
+             }
+         }
+
+         if ($paged < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($paged + 1)."'>&rsaquo;</a>";  
+         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>&raquo;</a>";
+         echo "</div>\n";
+     }
+}
 
 //------ DEBUGGING ------//
 

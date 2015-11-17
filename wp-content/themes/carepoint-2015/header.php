@@ -58,7 +58,7 @@
 			
 			<div class="block-form" <?php echo ( is_search() ? 'style="display: block;"' : NULL ); ?>>
 				<div class="container">
-					<form role="search" method="get" action="">
+					<form role="search" method="get" action="<?php bloginfo("url"); ?>">
 						<div class="search-form-select">
 							<label>I am looking for:</label>
 							<select class="select-style" name="search_type" id="">

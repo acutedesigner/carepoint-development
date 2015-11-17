@@ -33,7 +33,7 @@
 				<h2 class="section-header">Save &amp; Share</h2>
 				<div class="social-share">
 					<ul>
-						<?php cp_savearticle_button($post->ID); ?>
+						<?php cp_bookmark_article_button($post->ID); ?>
 						<?php cp_printpage_button($post->ID); ?>
 						<?php cp_ttpdf_button($post->ID); ?>
 						<li><a class="tooltip" title="Email this article" href="{{ url }}"><i class="fa fa-envelope-o"></i></a></li>
