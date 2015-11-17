@@ -50,14 +50,10 @@ $pagination = paginate_links( array(
 ?>
 
     <div class="container">
-        <nav class="breadcrumbs"></nav>
-        <div class="block block-intro">
-            <h1 class="b-title">Showing results for <?php echo '"'.get_search_query().'"'; ?></h1>
-            <h3><?php global $searchwp_result_count; echo 'There are '. $searchwp_result_count.' results found.'; ?></h3>
-        </div>
-
-    </div><!-- end of .container -->
-
+        <h1>Showing results for <?php echo '"'.get_search_query().'"'; ?></h1>
+        <hr />
+        <p class="intro"><?php global $searchwp_result_count; echo 'There '.($searchwp_result_count == 1 ? 'is '.$searchwp_result_count.' result found.' : 'are '.$searchwp_result_count.' results found.'); ?></p>    
+    </div>
     <div class="two-column-grid container">
         <div class="left-column">
 
@@ -87,6 +83,7 @@ if ( ! empty( $swp_query->posts ) ) {
     } else {
     ?>
     <p>No results found.</p>
+    
     <?php } ?>
 
         </div><!-- end of .left-column -->
@@ -112,7 +109,7 @@ if ( ! empty( $swp_query->posts ) ) {
                     else
                     {
                         $url = explode("&cp_term", $_SERVER['QUERY_STRING']);
-                        echo "<li><h3><a href='". get_site_url() . '/?' . $url[0] ."'>Show all results</a></h3></li>";
+                        echo "<li><h3><a href='". get_site_url() . '/?' . $url[0] ."'><i class='fa fa-arrow-left'></i>&nbsp;Back to search results</a></h3></li>";
                     }
                 ?>      
                 </ul>

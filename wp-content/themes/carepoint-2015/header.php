@@ -55,21 +55,32 @@
 			<!-- end .nav-->
 
 			<?php get_atoz_menu(); ?>
-			
+
+			<?php
+				$post_type = ( $_REQUEST['search_type'] ? $_REQUEST['search_type'] : NULL );
+				$term = ( get_query_var('s') ? get_query_var('s') : NULL );
+			?>			
 			<div class="block-form" <?php echo ( is_search() ? 'style="display: block;"' : NULL ); ?>>
 				<div class="container">
 					<form role="search" method="get" action="<?php bloginfo("url"); ?>">
 						<div class="search-form-select">
 							<label>I am looking for:</label>
-							<select class="select-style" name="search_type" id="">
-								<option value="care_advice">Care Advice</option>
-								<option value="care_services">Care Services</option>
+
+							<?php
+								// This is to allow the search form to pre-populate the users search parameters
+								$search_options[] = array( 'post_type' => 'care_advice', 'post_type_name' => 'Care Advice' );
+								$search_options[] = array( 'post_type' => 'care_services', 'post_type_name' => 'Care Services' );
+							?>
+							<select class="select-style" name="search_type">
+							<?php foreach( $search_options as $options ):?>
+								<option <?php echo ( $options['post_type'] == $post_type ? "selected" : NULL); ?> value="<?php echo $options['post_type']; ?>"><?php echo $options['post_type_name']; ?></option>
+							<?php endforeach; ?>
 							</select>
-						
+
 							<input type="hidden" name="post_type" value="care-services" />
 						</div>
 						<div class="search-form-input">
-							<input type="search" name="s" id="s" placeholder="Your search term">
+							<input type="search" name="s" id="s" <?php echo ( get_query_var('s') ? 'value="'.get_query_var('s').'"' : NULL ) ?> placeholder="Your search term">
 						</div>
 						<div class="search-form-submit">
 							<input type="submit" class="btn red-grad" value="Search">

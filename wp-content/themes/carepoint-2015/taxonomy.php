@@ -42,8 +42,6 @@ get_header(); ?>
 
 		$terms = get_terms($current_category->taxonomy, $args);
 
-		// printme($current_category);
-
 	?>
 
 	<?php $div = 0; if($terms): ?>
