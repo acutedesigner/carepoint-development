@@ -56,14 +56,8 @@
 
 			<?php
 
-			$related = get_posts( array(
-				'category__in' => wp_get_post_categories($post->ID),
-				'post_type' => 'care-advice',
-				'numberposts' => 5,
-				'post__not_in' => array($post->ID)
-				) );
-
-			if( $related ){
+				$related_advice = get_field('related_care_advice');
+				if( $related_advice ){
 
 			?>
 
@@ -73,7 +67,7 @@
 
 			<?php
 
-			foreach( $related as $post ) {
+			foreach( $related_advice as $post ) {
 			setup_postdata($post);
 
 			?>
@@ -86,19 +80,21 @@
 
 			<?php } wp_reset_postdata(); ?>
 
-<!--
+			<?php
+
+				$related_services = get_field('related_care_services');
+				if( $related_services ){
+
+			?>
 				<h2 class="section-header">Related directory services</h2>
 				<div class="directory-service-list">
-					<a href="">
-						Accessible sports  for adults
-						<small>Services available: 9</small>
+			<?php foreach( $related_services as $post ){ ?>
+					<a href="<?php the_permalink() ?>">
+						<?php the_title(); ?>
 					</a>
-					<a href="">
-						Care Equipment
-						<small>Services available: 29</small>
-					</a>
+			<?php } ?>
 				</div>
--->
+			<?php } wp_reset_postdata(); ?>
 
 			</aside>
 
