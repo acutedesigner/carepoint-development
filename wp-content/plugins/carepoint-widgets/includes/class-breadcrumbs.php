@@ -35,6 +35,11 @@ function the_breadcrumb()
 
 		echo '<li><a href="'.get_option('home').'">Home</a></li>';
 
+		if(is_page())
+		{
+			echo '<li>'.$current_tax->name.'</li>';
+		}
+
 		if(is_tax())
 		{
 
