@@ -12,17 +12,48 @@ class carepointTextToPDF
 
 	public function __construct()
 	{
-		if ( !wp_verify_nonce( $_REQUEST['nonce'], "cp_ttpdf_nonce"))
+		
+		add_action( 'init', array( $this, 'cpttpdf_add_rewrites' ) );
+		register_activation_hook( __FILE__, array( $this, 'cpttpdf_rewrite_activation' ));
+		add_filter( 'query_vars', array( $this, 'cpttpdf_rewrite_add_var' ));
+		add_action( 'template_redirect', array( $this, 'cpttpdf_catch_form' ));
+
+	}
+
+	public function cpttpdf_add_rewrites()
+	{
+		add_rewrite_rule(
+			'^cp_ttpdf/?([0-9]*)/([a-z0-9]*)/?$',
+			'index.php?cp_ttpdf_post_id=$matches[1]&cp_ttpdf_nonce=$matches[2]',
+			'top'
+		);
+	}
+
+	public function cpttpdf_rewrite_activation()
+	{
+		$this->cpttpdf_add_rewrites();
+		flush_rewrite_rules();
+	}
+
+	public function cpttpdf_rewrite_add_var( $vars )
+	{
+	    $vars[] = 'cp_ttpdf_post_id';
+	    $vars[] = 'cp_ttpdf_nonce';
+	    return $vars;
+	}
+
+	public function cpttpdf_catch_form()
+	{
+
+		if( get_query_var('cp_ttpdf_post_id')  && wp_verify_nonce( get_query_var('cp_ttpdf_nonce'), "cp_ttpdf_nonce"))
 		{
-			// NOTE! Want this to go to 404 error page
-			exit("No naughty business please");
+			// Include the ttpdf class
+			require_once(CPT_PLUGIN_DIR . 'assets/tcpdf/tcpdf.php');
+
+	   		$this->get_post_content();
+	   		$this->setup_pdf();
 		}
 
-		// Include the ttpdf class
-		require_once(CPT_PLUGIN_DIR . 'assets/tcpdf/tcpdf.php');
-
-   		$this->get_post_content();
-   		$this->setup_pdf();
 	}
 
 	/**
@@ -34,7 +65,7 @@ class carepointTextToPDF
 	public function get_post_content()
 	{
 		//echo "get_post_content";
-		$the_post = get_post($_REQUEST['post_id']);
+		$the_post = get_post(get_query_var('cp_ttpdf_post_id'));
 
 		//print_r($the_post);
 
@@ -99,12 +130,7 @@ class carepointTextToPDF
  * @return PDF of the current post
  */
 
-function cp_ttpdf()
-{
-	$carepointTextToPDF = new carepointTextToPDF;
-}
-
-add_action("wp_ajax_nopriv_cp_ttpdf", "cp_ttpdf");
+$carepointTextToPDF = new carepointTextToPDF;
 
 
 /**
@@ -119,7 +145,8 @@ add_action("wp_ajax_nopriv_cp_ttpdf", "cp_ttpdf");
 function cp_ttpdf_button($post_id)
 {
 	$nonce = wp_create_nonce("cp_ttpdf_nonce");
-	$link = admin_url('admin-ajax.php?action=cp_ttpdf&post_id='.$post_id.'&nonce='.$nonce);
+	//$link = admin_url('admin-ajax.php?action=cp_ttpdf&post_id='.$post_id.'&nonce='.$nonce);
+	$link = site_url('/cp_ttpdf/'.$post_id.'/'.$nonce);
 	echo '<li><a class="cp_ttpdf_button tooltip" target="blank" title="Download article to PDF" href="' . $link . '"><i class="fa fa-file-pdf-o"></i></a></li>';
 }
 

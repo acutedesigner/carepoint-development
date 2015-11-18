@@ -8,13 +8,60 @@ class carepointSaveArticle
 	var $post_id;
 	var $result = array();
 
-	public function __construct()
+	function __construct()
+	{
+		add_action( 'init', array( $this, 'cpsa_add_rewrites' ) );
+		register_activation_hook( __FILE__, array( $this, 'cpsa_rewrite_activation' ));
+		add_filter( 'query_vars', array( $this, 'cpsa_rewrite_add_var' ));
+		add_action( 'template_redirect', array( $this, 'cpsa_catch_form' ));
+	}
+
+	function cpsa_add_rewrites()
+	{
+		add_rewrite_rule(
+			'^savearticle/([a-z]*)/([0-9]*)/([a-z0-9]*)/?$',
+			'index.php?cpsa_action=$matches[1]&cpsa_post_id=$matches[2]&cpsa_nonce=$matches[3]',
+			'top'
+		);
+	}
+
+	// Only need to have this done once
+	function cpsa_rewrite_activation()
+	{
+		$this->cpsa_add_rewrites();
+		flush_rewrite_rules();
+	}
+
+	function cpsa_rewrite_add_var( $vars )
+	{
+	    $vars[] = 'cpsa_action';
+	    $vars[] = 'cpsa_post_id';
+	    $vars[] = 'cpsa_nonce';
+	    return $vars;
+	}
+
+	function cpsa_catch_form()
 	{
 
-		if(isset($_REQUEST['post_id']))
+		if( get_query_var('cpsa_post_id') && wp_verify_nonce( get_query_var('cpsa_nonce'), "cp_bookmark_article_nonce"))
 		{
-			$this->post_id = $_REQUEST['post_id'];
+			$this->post_id = get_query_var('cpsa_post_id');
+
+			switch (get_query_var('cpsa_action')) {
+				case 'bookmark':
+					$this->bookmark_article();
+					break;
+
+				case 'unbookmark':
+					$this->unbookmark_article();
+					break;
+				
+				default:
+					# code...
+					break;
+			}
 		}
+
 	}
 
 	function bookmark_article()
@@ -22,7 +69,7 @@ class carepointSaveArticle
 
 		$this->result['method'] = "bookmark";
 
-		if ( !wp_verify_nonce( $_REQUEST['nonce'], "cp_bookmark_article_nonce"))
+		if ( !wp_verify_nonce( get_query_var('cpsa_nonce'), "cp_bookmark_article_nonce"))
 		{
 			// NOTE! Want this to go to 404 error page
 			exit("No naughty business please");
@@ -140,7 +187,7 @@ class carepointSaveArticle
 		{
 			$result = json_encode($this->result);
       		echo $result;
-      		wp_die();
+      		die();
 		}
 		else
 		{
@@ -175,27 +222,33 @@ add_action("wp_ajax_nopriv_cp_unbookmark_article", "cp_unbookmark_article");
  * 
  */
 
+global $carepointSaveArticle;
+$carepointSaveArticle = new carepointSaveArticle;
+
 function cp_bookmark_article_button($post_id)
 {
+
+	global $carepointSaveArticle;
 
 	$nonce = wp_create_nonce("cp_bookmark_article_nonce");
 
 	// We need to check to see if the article already has been bookmarked by this user.
-	$carepointSaveArticle = new carepointSaveArticle;
 
 	// print_r($carepointSaveArticle->check_article($post_id));
 
 	if($carepointSaveArticle->check_article($post_id))
 	{
 		// Show the unbookmark link
-		$link = admin_url('admin-ajax.php?action=cp_unbookmark_article&post_id='.$post_id.'&nonce='.$nonce);
-		echo '<li><a class="cp_bookmark_article_button tooltip" title="Remove article from your list" href="' . $link . '" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" data-action="cp_unbookmark_article" ><i class="fa fa-trash">&nbsp;</i></a></li>';
+		//$link = admin_url('admin-ajax.php?action=cp_unbookmark_article&post_id='.$post_id.'&nonce='.$nonce);
+		$link = site_url('/savearticle/unbookmark/'.$post_id.'/'.$nonce);
+		echo '<li><a class="cp_bookmark_article_button tooltip" title="Remove article from your list" href="' . $link . '" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" data-action="unbookmark" ><i class="fa fa-trash">&nbsp;</i></a></li>';
 	}
 	else
 	{
 		// Show the bookmark link
-		$link = admin_url('admin-ajax.php?action=cp_bookmark_article&post_id='.$post_id.'&nonce='.$nonce);
-		echo '<li><a class="cp_bookmark_article_button tooltip" title="Save this article" href="' . $link . '" data-post-id="'.$post_id.'" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" data-action="cp_bookmark_article" ><i class="fa fa-plus-circle">&nbsp;</i></a></li>';
+		//$link = admin_url('admin-ajax.php?action=cp_bookmark_article&post_id='.$post_id.'&nonce='.$nonce);
+		$link = site_url('/savearticle/bookmark/'.$post_id.'/'.$nonce);
+		echo '<li><a class="cp_bookmark_article_button tooltip" title="Save this article" href="' . $link . '" data-post-id="'.$post_id.'" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" data-action="bookmark" ><i class="fa fa-plus-circle">&nbsp;</i></a></li>';
 	}	
 
 }

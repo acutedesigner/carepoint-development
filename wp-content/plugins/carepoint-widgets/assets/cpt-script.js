@@ -39,19 +39,18 @@ jQuery(document).ready(function( $ ){
 		$.ajax({
 			type: "post",
 			dataType: "json",
-			url: wp_js_object.ajax_url,
-			data: {action: action, post_id: post_id, nonce: nonce},
+			url: wp_js_object.site_url + '/savearticle/' + action + '/' + post_id + '/' + nonce,
 			success: function(response){
 				if(response.type == "success" && response.method == "bookmark")
 				{
 					element.find("i").removeClass("fa-plus-circle").addClass("fa-trash");
-					element.data('action','cp_unbookmark_article');
+					element.data('action','unbookmark');
 					element.tooltipster('content', 'Remove article from your list');
 				}
 				else if(response.type == "success" && response.method == "unbookmark")
 				{
 					element.find("i").removeClass("fa-trash").addClass("fa-plus-circle");
-					element.data('action','cp_bookmark_article');
+					element.data('action','bookmark');
 					element.tooltipster('content', 'Save this article');
 				}
 			}
