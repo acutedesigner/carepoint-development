@@ -5,22 +5,6 @@
 
 get_header(); ?> 
 
-	<div class="container">
-		
-		<?php the_breadcrumb(); ?>
-
-		<div class="block block-intro">
-			<div class="text-block">
-				<h1 class="b-title"><?php single_cat_title( '', true ); ?></h1>
-				<p><?php echo category_description(); ?></p>
-			</div>
-			<div class="thumb-block">
-				<img src="<?php if (function_exists('z_taxonomy_image_url')) echo z_taxonomy_image_url(NULL, 'landscape-4x3'); ?>" />
-			</div>
-		</div>
-
-	</div><!-- end of .container -->
-
 	<?php
 
 		/*	
@@ -36,13 +20,29 @@ get_header(); ?>
 		$args = array(
 		    'orderby'           => 'name', 
 		    'order'             => 'ASC',
-		    'hide_empty'        => false, 
+		    // 'hide_empty'        => false, 
 		    'child_of'          => $current_category->term_id
 		); 
 
 		$terms = get_terms($current_category->taxonomy, $args);
 
 	?>
+
+	<div class="container">
+		
+		<?php the_breadcrumb(); ?>
+
+		<div class="block block-intro">
+			<div class="text-block">
+				<h1 class="b-title"><?php single_cat_title( '', true ); ?></h1>
+				<p><?php echo category_description(); ?></p>
+			</div>
+			<div class="thumb-block">
+				<img src="<?php if (function_exists('z_taxonomy_image_url')) echo z_taxonomy_image_url(NULL, 'landscape-4x3'); ?>" />
+			</div>
+		</div>
+
+	</div><!-- end of .container -->
 
 	<?php $div = 0; if($terms): ?>
 
@@ -83,6 +83,15 @@ get_header(); ?>
 		else:
 
 	?>
+
+	<div class="container">
+		
+		<?php the_breadcrumb(); ?>
+
+		<h1 class="b-title"><?php single_cat_title( '', true ); ?></h1>
+		<hr>
+
+	</div><!-- end of .container -->
 
 	<div class="two-column-grid container">
 		<div class="left-column">

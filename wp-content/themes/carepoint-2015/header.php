@@ -43,9 +43,11 @@
 
 			<nav class="primary-nav" id="nav">
 				<ul class="mini-menu">
-					<li><a href="#"><i class="fa fa-volume-up"></i></a></li>
-					<li><a href="#"><i class="fa fa-list-ul"></i></a></li>
-					<li><a class="search-toggle" href="#"><i class="fa fa-search"></i></a></li>
+					<li><a class="tooltip" title="Contact Us" href="<?php echo home_url( '/contact-us' ) ?>"><i class="fa fa-phone"></i></a></li>		
+					<li><a class="tooltip atoz-toggle" title="A to Z" href="#"><i class="fa fa-book"></i></a></li>		
+					<li><a class="tooltip" title="Browse Aloud" href="#"><i class="fa fa-headphones"></i></a></li>		
+					<li><a class="tooltip" title="Your saved articles" href="#"><i class="fa fa-list-ul"></i></a></li>		
+					<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
 				</ul>
 				<a class="to-main-nav" href="#main-nav">Menu <i class="fa fa-bars"></i></a>
 

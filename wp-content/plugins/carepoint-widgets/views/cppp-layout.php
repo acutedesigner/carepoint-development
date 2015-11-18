@@ -28,11 +28,11 @@
 
 	</head>
 	<body  <?php body_class(); ?> >
-	<div class="container print">
+	<div class="container">
 		<img src="<?php bloginfo("template_directory"); ?>/library/images/carepoint-logo.png" alt="Care Point Logo" />
 
 		<hr />
-		<article>
+		<article class="text"	>
 		<?php
 			echo '<h1>'.$the_post->post_title.'</h1>';
 			echo apply_filters('the_content', $the_post->post_content);
