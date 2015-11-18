@@ -29,7 +29,8 @@
 					<img src="<?php bloginfo("template_url"); ?>/library/images/nhs-choices-logo.jpg" alt="NHS Choices">
 				</div>
 				<?php endif; ?>
-				
+
+				<?php if(!is_page()): ?>				
 				<h2 class="section-header">Save &amp; Share</h2>
 				<div class="social-share">
 					<ul>
@@ -53,7 +54,7 @@
 					<?php endforeach; ?>
 					</div>
 				<?php endif; ?>
-
+				<?php endif; // end is_page() ?>
 			<?php
 
 				$related_advice = get_field('related_care_advice');
