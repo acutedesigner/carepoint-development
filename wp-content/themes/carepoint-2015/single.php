@@ -36,9 +36,9 @@
 						<?php cp_bookmark_article_button($post->ID); ?>
 						<?php cp_printpage_button($post->ID); ?>
 						<?php cp_ttpdf_button($post->ID); ?>
-						<li><a class="tooltip" title="Email this article" href="{{ url }}"><i class="fa fa-envelope-o"></i></a></li>
-						<li><a class="tooltip" title="Share on Facebook" href="{{ url }}"><i class="fa fa-facebook"></i></a></li>
-						<li><a class="tooltip" title="Share on Twitter" href="{{ url }}"><i class="fa fa-twitter"></i></a></li>
+						<li><a class="tooltip" title="Email this article" href="mailto:?subject=<?php echo htmlentities(get_the_title()); ?>&body=<?php echo htmlentities(get_the_permalink()); ?>%0A%0AFrom%20Carepoint"><i class="fa fa-envelope-o"></i></a></li>
+						<li><a class="tooltip" title="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank"><i class="fa fa-facebook"></i></a></li>
+						<li><a class="tooltip" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=<?php the_permalink(); ?>&amp;text=<?php the_title(); ?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
 					</ul>
 				</div>
 
