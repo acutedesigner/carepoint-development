@@ -69,12 +69,6 @@ class carepointSaveArticle
 
 		$this->result['method'] = "bookmark";
 
-		if ( !wp_verify_nonce( get_query_var('cpsa_nonce'), "cp_bookmark_article_nonce"))
-		{
-			// NOTE! Want this to go to 404 error page
-			exit("No naughty business please");
-		}
-
 		if($this->post_id != $_COOKIE['cp_sa_'.$this->post_id])
 		{
 			$time_stamp = time();
