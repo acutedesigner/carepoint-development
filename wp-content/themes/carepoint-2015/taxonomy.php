@@ -100,7 +100,7 @@ get_header(); ?>
 
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 		$category = get_query_var('care-advice-categories');
-		$args = array('paged' => $paged, 'care-advice-categories' => $category );
+		$args = array('paged' => $paged, 'care-advice-categories' => $category, 'orderby' => 'menu_order', 'order' => 'asc' );
 
 		$cp_query = new WP_Query( $args );
 

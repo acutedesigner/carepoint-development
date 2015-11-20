@@ -17,6 +17,7 @@ if(isset($_REQUEST['cp_term']))
             's'      => $_REQUEST['s'],    // search query
             'engine' => $_REQUEST['search_type'], // search engine
             'page'   => $swppg,
+            'post_status' => 'publish',
             'tax_query' => array(       // tax_query support
                         array(
                             'taxonomy' => str_replace('_','-',$_REQUEST['search_type']) . '-categories',
@@ -32,6 +33,7 @@ else
     $swp_query = new SWP_Query(
         array(
             's'      => $_REQUEST['s'],    // search query
+            'post_status' => 'publish',
             'engine' => $_REQUEST['search_type'], // search engine
             'page'   => $swppg
         )
@@ -86,18 +88,19 @@ if ( ! empty( $swp_query->posts ) ) {
     
     <?php } ?>
 
-        </div><!-- end of .left-column -->
+        </div>
+        <!-- end of .left-column -->
+        
         <div class="right-column">
 
             <section class="section related-posts">
                 <h2 class="section-header">Filter results by category</h2>
                 <ul class="headline-list">
                 <?php
+                    global $searchwp_categories;
 
-                    if(!isset($_REQUEST['cp_term']))
+                    if(!isset($_REQUEST['cp_term']) && $searchwp_categories != '' )
                     {
-                        global $searchwp_categories;
-
                         foreach($searchwp_categories as $category)
                         {
                             if($category['cat-slug'] != '')
@@ -106,7 +109,7 @@ if ( ! empty( $swp_query->posts ) ) {
                             }
                         }
                     }
-                    else
+                    else if(isset($_REQUEST['cp_term']))
                     {
                         $url = explode("&cp_term", $_SERVER['QUERY_STRING']);
                         echo "<li><h3><a href='". get_site_url() . '/?' . $url[0] ."'><i class='fa fa-arrow-left'></i>&nbsp;Back to search results</a></h3></li>";
@@ -116,7 +119,9 @@ if ( ! empty( $swp_query->posts ) ) {
 
             </section>
 
-        </div><!-- end of .right-column -->
+        </div>
+        <!-- end of .right-column -->
+
     </div>
 
 

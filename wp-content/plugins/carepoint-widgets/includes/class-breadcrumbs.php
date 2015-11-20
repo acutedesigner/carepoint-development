@@ -58,26 +58,58 @@ function the_breadcrumb()
 
 		if(is_single())
 		{
-			global $post;
-			//get the term of the current post
-			$single_terms = get_the_terms( $post->ID, 'care-advice-categories' );
+			$url = array_filter(explode("/", $_SERVER["HTTP_REFERER"]));
+			//printme($url);
 
-			foreach ($single_terms as $term) {
-				// We want the get the reffering page
-				// use array filter to remove empty items
-				$url = array_filter(explode("/", $_SERVER["HTTP_REFERER"]));
-				$url = array_pop($url);
+			if(in_array("tag",$url))
+			{
+			    // Get the
+			    
+				$term = array_pop($url);
 
-				// !NOTE we need a filter for atoz reffered links
+				$letter = array_pop($url);
 
-				//only print the link if the slug matches the reffering url
-				if($term->slug == $url)
-				{
-					get_taxonomy_parents($term->parent, $term->taxonomy);
-					echo '<li><a href="'.get_term_link( $term ).'">'.$term->name.'</a></li>';
-					break;
-				}
+				echo '<li class="atoz-toggle"><a href="">A to Z</a></li>';
+				echo '<li><a href="'.get_site_url().'/tag/'.$letter.'">'.ucfirst($letter).'</a></li>';
+				echo '<li><a href="'.get_atoz_letter_link($term).'">'.ucfirst($term).'</a></li>';
+
 			}
+			elseif(strpos(end($url),'search') !== false)
+			{
+				// Display crumbs for search results
+				echo '<li><a href="'.get_site_url().'/'.end($url).'">Search results</a></li>';
+			}
+			else
+			{
+				// Displaying the crumbs for links coming from categories
+				global $post;
+
+				//get the terms of the current post				
+				$single_terms = get_the_terms( $post->ID, $post->post_type.'-categories' );
+
+				$url_term = array_pop($url);
+				
+				foreach ($single_terms as $term) {
+
+					// Display crumb for link from category
+					if($term->slug == $url_term)
+					{
+						get_taxonomy_parents($term->parent, $term->taxonomy);
+						echo '<li><a href="'.get_term_link( $term ).'">'.$term->name.'</a></li>';
+						break;
+					}
+					// Display crumb for link from anywhere else
+					elseif(empty($url_term))
+					{
+						get_taxonomy_parents($term->parent, $term->taxonomy);
+						echo '<li><a href="'.get_term_link( $term ).'">'.$term->name.'</a></li>';
+						break;
+					}
+
+				}
+
+			}
+
 
 			//$post_type = get_post_type( $post );
 			echo '<li>'.the_title().'</li>';			

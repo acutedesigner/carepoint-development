@@ -132,6 +132,36 @@ function kriesi_pagination($pages = '', $range = 2)
      }
 }
 
+if( function_exists('acf_add_options_page') ) {
+ 
+    $page = acf_add_options_page(array(
+        'page_title'    => 'Theme General Settings',
+        'menu_title'    => 'Theme Settings',
+        'menu_slug'     => 'theme-general-settings',
+        'capability'    => 'edit_posts',
+        'redirect'  => false
+    ));
+ 
+}
+
+if( function_exists('acf_add_options_sub_page') )
+{
+    acf_add_options_sub_page( 'Footer' );
+}
+
+/*
+*  Create an advanced sub page called 'Footer' that sits under the General options menu
+*/
+
+if( function_exists('acf_add_options_sub_page') )
+{
+    acf_add_options_sub_page(array(
+        'title' => 'Footer',
+        'parent' => 'options-general.php',
+        'capability' => 'manage_options'
+    ));
+}
+
 //------ DEBUGGING ------//
 
 function inspect_wp_query() 

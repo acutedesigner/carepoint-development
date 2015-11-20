@@ -55,7 +55,9 @@
 			});
 
 			$('.bxslider').bxSlider({
+			  auto: true,
 			  mode: 'fade',
+			  speed: 4000,
 			  captions: true,
 			  controls: false
 			});
