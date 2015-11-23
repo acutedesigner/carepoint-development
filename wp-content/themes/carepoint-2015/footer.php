@@ -54,6 +54,12 @@
 				$('.block-atoz-index').slideToggle();
 			});
 
+			//------ EMAIL FORM ------//
+			$('.email-form-button').click(function(e){
+				e.preventDefault();
+				$('.email-form').slideToggle();
+			});
+
 			$('.bxslider').bxSlider({
 			  auto: true,
 			  mode: 'fade',

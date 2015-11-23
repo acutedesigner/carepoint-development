@@ -33,7 +33,7 @@ require_once CPT_PLUGIN_DIR . 'includes/class-savearticle.php';
 
 
 // Register javascript
-wp_register_script('carepoint_script', plugins_url('assets/cpt-script.js', __FILE__), array('jquery'),'1.1', true);
+wp_register_script('carepoint_script', plugins_url('assets/js/cpt-script.js', __FILE__), array('jquery'),'1.1', true);
 
 // Localize the script with new data
 // To make it easy for JS to access website URLs ^_^
@@ -58,7 +58,8 @@ function carepoint_activation()
 	$create_sql = "CREATE TABLE $wpdb->cp_save_article (".
 					"cp_sa_id int(11) NOT NULL AUTO_INCREMENT,".
 					"cp_sa_postid int(11) NOT NULL,".
-					"cp_sa_posttitle text NOT NULL,".
+					"cp_sa_userid int(11) NOT NULL,".
+					"cp_sa_posttype text NOT NULL,".
 					"cp_sa_timestamp varchar(15) NOT NULL,".
 					"cp_sa_ip varchar(40) NOT NULL,".
 					"PRIMARY KEY (cp_sa_id))";
