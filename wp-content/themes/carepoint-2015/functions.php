@@ -84,7 +84,7 @@ function my_searchwp_results( $results, $attributes ) {
 
         //printme($cats);
 
-    
+
 		foreach ((array)$cats as $cat) {
 			$searchwp_categories[$cat->name] = array(
 					'cat-name' => $cat->name,
@@ -167,6 +167,15 @@ if( function_exists('acf_add_options_sub_page') )
         'capability' => 'manage_options'
     ));
 }
+
+// Let's stop WordPress re-ordering my categories/taxonomies when I select them    
+function stop_reordering_my_categories($args) {
+    $args['checked_ontop'] = false;
+    return $args;
+}
+
+// Let's initiate it by hooking into the Terms Checklist arguments with our function above
+add_filter('wp_terms_checklist_args','stop_reordering_my_categories');
 
 //------ DEBUGGING ------//
 
