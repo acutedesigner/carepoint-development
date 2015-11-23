@@ -84,8 +84,7 @@ function my_searchwp_results( $results, $attributes ) {
 
         //printme($cats);
 
-        if(){}
-            
+    
 		foreach ((array)$cats as $cat) {
 			$searchwp_categories[$cat->name] = array(
 					'cat-name' => $cat->name,
