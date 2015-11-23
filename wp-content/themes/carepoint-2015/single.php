@@ -37,11 +37,22 @@
 						<?php cp_bookmark_article_button($post->ID); ?>
 						<?php cp_printpage_button($post->ID); ?>
 						<?php cp_ttpdf_button($post->ID); ?>
-						<li><a class="tooltip" title="Email this article" href="mailto:?subject=<?php echo htmlentities(get_the_title()); ?>&body=<?php echo htmlentities(get_the_permalink()); ?>%0A%0AFrom%20Carepoint"><i class="fa fa-envelope-o"></i></a></li>
+						<li><a class="tooltip email-form-button" title="Email this article" href="#"><i class="fa fa-envelope-o"></i></a></li>
 						<li><a class="tooltip" title="Share on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank"><i class="fa fa-facebook"></i></a></li>
 						<li><a class="tooltip" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=<?php the_permalink(); ?>&amp;text=<?php the_title(); ?>" target="_blank"><i class="fa fa-twitter"></i></a></li>
 					</ul>
 				</div>
+
+<!-- 				<div class="block email-form">
+					<h3>Email this article</h3>
+					<p>Please enter the email address you want to send this article to:</p>
+					<form action="">
+						<input type="text">
+						<input class="btn red-grad" type="submit">
+					</form>
+					<hr/>
+					<a class="btn blue-grad email-form-button" href="#">Hide form <i class="fa fa-close"></i></a>
+				</div> -->
 
 				<h2 class="section-header">Rate this article</h2>
 				<?php if(function_exists('the_ratings')) { the_ratings(); } ?>

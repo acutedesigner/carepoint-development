@@ -70,6 +70,7 @@
 
 							<?php
 								// This is to allow the search form to pre-populate the users search parameters
+								$search_options[] = array( 'post_type' => 'everything', 'post_type_name' => 'Any Information' );
 								$search_options[] = array( 'post_type' => 'care_advice', 'post_type_name' => 'Care Advice' );
 								$search_options[] = array( 'post_type' => 'care_services', 'post_type_name' => 'Care Services' );
 							?>

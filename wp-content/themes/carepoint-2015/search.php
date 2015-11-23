@@ -9,36 +9,32 @@
 // retrieve our pagination if applicable
 $swppg = isset( $_REQUEST['swppg'] ) ? absint( $_REQUEST['swppg'] ) : 1;
 
-// Check if the term filter is used
-if(isset($_REQUEST['cp_term']))
-{
-    $swp_query = new SWP_Query(
-        array(
-            's'      => $_REQUEST['s'],    // search query
-            'engine' => $_REQUEST['search_type'], // search engine
-            'page'   => $swppg,
-            'post_status' => 'publish',
-            'tax_query' => array(       // tax_query support
-                        array(
-                            'taxonomy' => str_replace('_','-',$_REQUEST['search_type']) . '-categories',
-                            'field'    => 'slug',
-                            'terms'    => array( $_REQUEST['cp_term'] ),
-                        ),
-                    ),
-        )
+// Setup default parameters
+$args = array(
+    's' => $_REQUEST['s'],
+    'page'   => $swppg,    
+    'post_status' => 'publish',
     );
-}
-else
+
+// Now we add in additonal parameters based on case
+
+// Which engine should we use
+$args['engine'] = $_REQUEST['search_type'];
+
+// Handle the filters
+if(isset($_REQUEST['cp_term']) && $_REQUEST['search_type'] != 'everything')
 {
-    $swp_query = new SWP_Query(
-        array(
-            's'      => $_REQUEST['s'],    // search query
-            'post_status' => 'publish',
-            'engine' => $_REQUEST['search_type'], // search engine
-            'page'   => $swppg
-        )
-    );
+    $taxonomy = str_replace('_','-',$_REQUEST['search_type']) . '-categories';
+    $args['tax_query'] = array(
+                            array(
+                                'taxonomy' => $taxonomy,
+                                'field'    => 'slug',
+                                'terms'    => array( $_REQUEST['cp_term'] )
+                            ),
+                        );
 }
+
+$swp_query = new SWP_Query( $args );
 
 // set up pagination
 $pagination = paginate_links( array(

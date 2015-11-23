@@ -23,6 +23,12 @@ class carepointSaveArticle
 			'index.php?cpsa_action=$matches[1]&cpsa_post_id=$matches[2]&cpsa_nonce=$matches[3]',
 			'top'
 		);
+		add_rewrite_rule(
+			'^savearticle/([a-z]*)/([a-z0-9]*)/?$',
+			'index.php?cpsa_action=$matches[1]&cpsa_nonce=$matches[2]',
+			'top'
+		);
+
 	}
 
 	// Only need to have this done once
@@ -61,6 +67,10 @@ class carepointSaveArticle
 					break;
 			}
 		}
+		elseif(get_query_var('cpsa_action') == 'viewbookmarks' && wp_verify_nonce( get_query_var('cpsa_nonce'), "cp_bookmark_article_nonce"))
+		{
+			$this->viewbookmarks();
+		}
 
 	}
 
@@ -76,10 +86,20 @@ class carepointSaveArticle
 			// Set the new cookie
 			setcookie("cp_sa_".$this->post_id, $time_stamp, time() + 30000000, apply_filters('cp_bookmark_cookiepath', SITECOOKIEPATH));
 
+			// Check user has unique identifier cookie
+
+			if(!isset($_COOKIE['cp_sa_userid'])) {
+				$newid = time();
+				setcookie('cp_sa_userid', $newid, time() + 30000000, apply_filters('cp_bookmark_cookiepath', SITECOOKIEPATH));
+			}
+
+			$userid = ($_COOKIE['cp_sa_userid'] ? $_COOKIE['cp_sa_userid'] : $newid );
+
 			// Create the db data
 			$save_data = array(
 				'cp_sa_postid' => $this->post_id,
-				'cp_sa_posttype' => get_post_type( $this->post_id ),
+				'cp_sa_userid' => $userid,
+				'cp_sa_posttype' => get_post_type($this->post_id ),
 				'cp_sa_timestamp' => $time_stamp,
 				'cp_sa_ip' => $this->get_ipaddress()
 			);
@@ -94,7 +114,7 @@ class carepointSaveArticle
 			else
 			{
 				// NOTE! Want this to go to 404 error page
-				exit("No naughty business please");				
+				exit("Not saved to the database");				
 			}
 
 		}
@@ -128,6 +148,35 @@ class carepointSaveArticle
 		}
 
 		$this->return_to_page();
+	}
+
+	function viewbookmarks()
+	{
+		// Get a list of the bookmarks based on the cookie
+		if($_COOKIE['cp_sa_userid'])
+		{
+
+			global $wpdb;
+			$results = $wpdb->get_results( 'SELECT cp_sa_postid FROM '.$wpdb->cp_save_article.' WHERE cp_sa_userid = '.$_COOKIE['cp_sa_userid'] );
+			
+			//print_r($results);
+			$userposts = array();
+
+			foreach ($results as $key) {
+				$userposts[] = $key->cp_sa_postid;
+			}
+
+			get_header();
+			include(CPT_PLUGIN_DIR . '/views/' . 'saved-article-list.php');	
+			get_footer();
+			exit();
+
+		}
+		else
+		{
+			echo "We have nothing";
+		}
+
 	}
 
 	function get_bookmarked_articles()
@@ -169,7 +218,7 @@ class carepointSaveArticle
 	function save_to_db($save_data)
 	{
 		global $wpdb;			
-		if($wpdb->insert( $wpdb->cp_save_article, $save_data, array('%d','%d','%s','%s','%s',)))
+		if($wpdb->insert( $wpdb->cp_save_article, $save_data, array('%d','%s','%s','%d','%s',)))
 		{
 			return TRUE;
 		}
@@ -219,6 +268,14 @@ add_action("wp_ajax_nopriv_cp_unbookmark_article", "cp_unbookmark_article");
 global $carepointSaveArticle;
 $carepointSaveArticle = new carepointSaveArticle;
 
+function cp_view_bookmarks_button()
+{
+	$nonce = wp_create_nonce("cp_bookmark_article_nonce");
+	$link = site_url('/savearticle/viewbookmarks/'.$nonce);
+	echo '<li><a class="cp_view_bookmarks_button tooltip" title="Your saved articles" href="' . $link . '" data-nonce="'.$nonce.'" data-action="viewbookmarks" ><i class="fa fa-list-ul">&nbsp;</i></a></li>';
+
+}
+
 function cp_bookmark_article_button($post_id)
 {
 
@@ -242,7 +299,7 @@ function cp_bookmark_article_button($post_id)
 		// Show the bookmark link
 		//$link = admin_url('admin-ajax.php?action=cp_bookmark_article&post_id='.$post_id.'&nonce='.$nonce);
 		$link = site_url('/savearticle/bookmark/'.$post_id.'/'.$nonce);
-		echo '<li><a class="cp_bookmark_article_button tooltip" title="Save this article" href="' . $link . '" data-post-id="'.$post_id.'" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" data-action="bookmark" ><i class="fa fa-plus-circle">&nbsp;</i></a></li>';
+		echo '<li><a class="cp_bookmark_article_button tooltip" title="Save this article" href="' . $link . '" data-post-id="'.$post_id.'" data-nonce="'.$nonce.'" data-action="bookmark" ><i class="fa fa-plus-circle">&nbsp;</i></a></li>';
 	}	
 
 }
