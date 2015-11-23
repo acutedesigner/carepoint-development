@@ -29,9 +29,20 @@ if(isset($_REQUEST['cp_term']) && $_REQUEST['search_type'] != 'everything')
                             array(
                                 'taxonomy' => $taxonomy,
                                 'field'    => 'slug',
-                                'terms'    => array( $_REQUEST['cp_term'] )
+                                'terms'    => $_REQUEST['cp_term']
                             ),
                         );
+}
+elseif(isset($_REQUEST['cp_term']) && $_REQUEST['search_type'] == 'everything')
+{
+    $args['tax_query'] = array(
+                            array(
+                                'taxonomy' => $_REQUEST['cp_tax'],
+                                'field'    => 'slug',
+                                'terms'    => $_REQUEST['cp_term']
+                            ),
+                        );
+    $args['engine'] = str_replace('-','_',$_REQUEST['search_type']);
 }
 
 $swp_query = new SWP_Query( $args );
@@ -101,11 +112,11 @@ if ( ! empty( $swp_query->posts ) ) {
                         {
                             if($category['cat-slug'] != '')
                             {
-                                echo "<li><h3><a href='". get_site_url() . '/?' . $_SERVER['QUERY_STRING'] . '&cp_term='. $category['cat-slug'] ."'>". $category['cat-name'] ."</a></h3></li>";
+                                echo '<li><h3><a href="'. get_site_url() . '/?' . $_SERVER['QUERY_STRING'] . '&cp_term='. $category['cat-slug'] .'&cp_tax='.$category['cat-tax'].'">'. $category['cat-name'] .'</a></h3></li>';
                             }
                         }
                     }
-                    else if(isset($_REQUEST['cp_term']))
+                    elseif(isset($_REQUEST['cp_term']))
                     {
                         $url = explode("&cp_term", $_SERVER['QUERY_STRING']);
                         echo "<li><h3><a href='". get_site_url() . '/?' . $url[0] ."'><i class='fa fa-arrow-left'></i>&nbsp;Back to search results</a></h3></li>";

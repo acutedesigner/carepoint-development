@@ -79,8 +79,6 @@
 								<option <?php echo ( $options['post_type'] == $post_type ? "selected" : NULL); ?> value="<?php echo $options['post_type']; ?>"><?php echo $options['post_type_name']; ?></option>
 							<?php endforeach; ?>
 							</select>
-
-							<input type="hidden" name="post_type" value="care-services" />
 						</div>
 						<div class="search-form-input">
 							<input type="search" name="s" id="s" <?php echo ( get_query_var('s') ? 'value="'.get_query_var('s').'"' : NULL ) ?> placeholder="Your search term">
