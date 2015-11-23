@@ -77,7 +77,7 @@ function my_searchwp_results( $results, $attributes ) {
 
 	$searchwp_result_count = $attributes['foundPosts'];
 
-    printme($results);
+    //printme($results);
 
 	foreach ($results as $result) {
     	$cats = get_the_terms( $result->ID, $result->post_type.'-categories' );
