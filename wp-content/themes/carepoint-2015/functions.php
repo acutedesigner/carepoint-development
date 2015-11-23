@@ -41,34 +41,6 @@ function custom_rating_image_extension() {
 }
 add_filter( 'wp_postratings_image_extension', 'custom_rating_image_extension' );
 
-/**
- * 
- * 1: Get a list of tags beginning with the letter $foo
- * 2: From that get a list of articles that are tagged with the term $bar
- * 3: The list of articles need to be able to be filtered by advice or title
- * 
- */
-
-// add_action('wp_loaded', function(){
-//         $post_types = get_post_types( array( 'public' => true ), 'names' ); 
-//         print_r($post_types);
-// });
-
-// add_filter( 'nav_menu_link_attributes', 'add_active_class', 10, 3 );
-
-// function add_active_class( $atts, $item, $args ) {
-// 	if($item->type == 'taxonomy' && is_tax())
-// 	{
-// 		$url = array_filter(explode("/", $_SERVER["REQUEST_URI"])); // use array filter to remove empty values
-// 		$url = array_pop($url);
-// 		$category = get_the_category($url);
-// 		printme($category);		
-// 		$atts['class'] = 'active';
-// 	}
-// 		return $atts;
-// }
-// 
-
 
 function my_searchwp_results( $results, $attributes ) {
 	
@@ -77,24 +49,34 @@ function my_searchwp_results( $results, $attributes ) {
 
 	$searchwp_result_count = $attributes['foundPosts'];
 
-    //printme($results);
+    $search_type = str_replace('_','-',$_REQUEST['search_type']);
 
 	foreach ($results as $result) {
     	$cats = get_the_terms( $result->ID, $result->post_type.'-categories' );
 
-        //printme($cats);
+        
+        if($search_type == $result->post_type && $search_type != 'everything')
+        {
+            foreach ((array)$cats as $cat) {
+                $searchwp_categories[$cat->name] = array(
+                        'cat-name' => $cat->name,
+                        'cat-tax' => $cat->taxonomy,
+                        'cat-slug' => $cat->slug
+                    );
+            }            
+        }
+        elseif($search_type == 'everything')
+        {
+            foreach ((array)$cats as $cat) {
+                $searchwp_categories[$cat->name] = array(
+                        'cat-name' => $cat->name,
+                        'cat-tax' => $cat->taxonomy,
+                        'cat-slug' => $cat->slug
+                    );
+            }            
+        }
 
-
-		foreach ((array)$cats as $cat) {
-			$searchwp_categories[$cat->name] = array(
-					'cat-name' => $cat->name,
-					'cat-slug' => $cat->slug
-				);
-		}
     }
-
-    // $searchwp_categories = array_keys($searchwp_categories);
-    // sort($searchwp_categories);
 
 	return $results;
 }
