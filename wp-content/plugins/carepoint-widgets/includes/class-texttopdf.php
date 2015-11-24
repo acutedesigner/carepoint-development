@@ -4,7 +4,7 @@ if(!class_exists('carepointTextToPDF'))
 {
 
 // Include the ttpdf class
-require_once(CPT_PLUGIN_DIR . 'assets/tcpdf/tcpdf.php');
+require_once(CPT_PLUGIN_DIR . 'assets/php/tcpdf/tcpdf.php');
 
 class carepointTextToPDF
 {

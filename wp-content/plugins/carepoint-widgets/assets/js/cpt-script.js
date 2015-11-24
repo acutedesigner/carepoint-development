@@ -21,6 +21,37 @@ jQuery( function( $ )
 		window.location.href = wp_js_object.site_url + "/tag/" + $(this).val();
 	});
 
+	// Function for email article form
+	$(".email-form").submit(function (e)
+	{
+		e.preventDefault();
+
+		//Get the form object
+		$form = $(this);
+
+		// Hide the form and show sending gif
+		
+		email = $form.find( "input[name='email']" ).val();
+		nonce = $form.find("input[name='nonce']").val();
+		action = $form.find("input[name='action']").val();
+			
+		$.ajax({
+			type: "post",
+			dataType: "json",
+			data: { email: email, nonce: nonce, action: action },
+			url: wp_js_object.ajax_url,
+			success: function(response){
+				if(response.type == "success")
+				{
+					alert('success');
+				}
+				else if(response.type == "error")
+				{
+					alert('error');
+				}
+			}
+		});
+	});
 
 
 });

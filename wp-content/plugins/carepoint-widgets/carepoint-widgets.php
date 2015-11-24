@@ -5,7 +5,7 @@ Plugin URI: http://www.acumendesign.co.uk
 Description: A collections of features and function exclusive for the Havering Care Point Website
 Version: 1.0
 Author: @acute_designer
-Author http://www.acumendesign.co.uk
+Author Nigel M Peters
 License: GPL2
 */
 
@@ -30,13 +30,14 @@ require_once CPT_PLUGIN_DIR . 'includes/class-atoz.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-texttopdf.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-printpage.php';
 require_once CPT_PLUGIN_DIR . 'includes/class-savearticle.php';
+require_once CPT_PLUGIN_DIR . 'includes/class-emailarticle.php';
 
 
 // Register javascript
 wp_register_script('carepoint_script', plugins_url('assets/js/cpt-script.js', __FILE__), array('jquery'),'1.1', true);
 
 // Localize the script with new data
-// To make it easy for JS to access website URLs ^_^
+// To make it easy for JS to access wordpress URLs ^_^
 $site_parameters = array(
     'site_url' => get_site_url(),
     'ajax_url' => admin_url( 'admin-ajax.php' ),
