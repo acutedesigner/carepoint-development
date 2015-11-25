@@ -487,10 +487,10 @@ class GUMP
                     $resp[] = "There is no validation rule for <span class=\"$field_class\">$field</span>";
                     break;
                 case 'validate_required' :
-                    $resp[] = "The <span class=\"$field_class\">$field</span> field is required";
+                    $resp[] = "<i class=\"fa fa-warning\"></i> The <span class=\"$field_class\">$field</span> field is required";
                     break;
                 case 'validate_valid_email':
-                    $resp[] = "The <span class=\"$field_class\">$field</span> field is required to be a valid email address";
+                    $resp[] = "<i class=\"fa fa-warning\"></i> The <span class=\"$field_class\">$field</span> field is required to be a valid email address";
                     break;
                 case 'validate_max_len':
                     $resp[] = "The <span class=\"$field_class\">$field</span> field needs to be $param or shorter in length";
