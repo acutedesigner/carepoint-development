@@ -36,7 +36,12 @@
 				<nav class="header-nav">
 					<script type="text/javascript">var _baLocale = 'uk', _baUseCookies = true, _baMode = '<?php bloginfo("template_directory"); ?>/library/images/cp-browsealoud-logo.jpg', _baHiddenMode = false, _baHideOnLoad = false;</script>
 					<script type="text/javascript" src="//www.browsealoud.com/plus/scripts/ba.js"></script>
-					<?php wp_nav_menu( array('theme_location' => 'header_menu', 'container' => 'false')); ?>
+					<ul class="mini-menu">
+						<li><a class="tooltip" title="Contact Us" href="<?php echo home_url( '/contact-us' ) ?>">Contact Us</a></li>		
+						<li><a class="tooltip atoz-toggle" title="A to Z" href="#">A to Z</a></li>		
+						<?php echo cp_view_bookmarks_button(); ?>
+						<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
+					</ul>
 				</nav>
 			</header>
 			<!-- End .header -->
