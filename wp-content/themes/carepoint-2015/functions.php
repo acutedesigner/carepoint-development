@@ -125,7 +125,7 @@ function kriesi_pagination($pages = '', $range = 2)
 function cp_footer_addresses()
 {
     // Lets get the addresses for the footer
-    // 
+
     $args = array(
             'post_type' => 'carepoint-adresses',
             'posts_per_page' => -1

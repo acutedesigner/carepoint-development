@@ -13,6 +13,41 @@
 
 				<h1><?php the_title(); ?></h1>	
 				<?php the_content(); ?>
+				<?php
+
+				// Lets get the linked address if available
+				$post_object = get_field('address_link');
+
+				if( $post_object ): 
+
+					// override $post
+					$post = $post_object;
+					setup_postdata( $post ); 
+
+					?>
+				    <div class="block block-contact-info">
+				    	<h3><?php the_title(); ?></h3>
+				    	<p>
+				    	<?php 
+				    		$address = ( get_field('address_line_1') ? get_field('address_line_1').'<br/>' : NULL);
+				    		$address .= ( get_field('address_line_2') ? get_field('address_line_2').'<br/>' : NULL);
+				    		$address .= ( get_field('address_line_3') ? get_field('address_line_3').'<br/>' : NULL);
+				    		$address .= ( get_field('post_code') ? get_field('post_code') : NULL);
+				    		echo $address;
+				    	?>
+				    	</p>
+				    	<?php if(get_field('tel') || get_field('email')){ ?>
+				    	<p>
+				    	<?php
+			    			$contact = ( get_field('tel') ? '<strong>Tel: </strong>'.get_field('tel').'<br/>' : NULL);
+			    			$contact .= ( get_field('email') ? '<strong>Email: </strong>'.get_field('email') : NULL);
+			    			echo $contact;
+						?>
+				    	</p>
+						<?php } ?>
+				    </div>
+				    <?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
+				<?php endif; ?>
 
 				<?php endwhile; else: // End the loop. Whew. ?>
 					<h1>Sorry No article here</h1>
