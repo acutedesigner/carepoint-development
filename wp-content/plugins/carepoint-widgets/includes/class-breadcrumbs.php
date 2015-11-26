@@ -85,7 +85,7 @@ function the_breadcrumb()
 				global $post;
 
 				//get the terms of the current post				
-				$single_terms = get_the_terms( $post->ID, $post->post_type.'-categories' );
+				$single_terms = get_the_terms( $post->ID, $post->post_type.'-categories', array( 'parent' => 0 ) );
 
 				$url_term = array_pop($url);
 				

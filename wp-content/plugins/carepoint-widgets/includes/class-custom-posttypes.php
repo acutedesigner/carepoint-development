@@ -36,6 +36,7 @@ function care_advice() {
 		'menu_position'       => 8,
 		'show_in_admin_bar'   => true,
 		'show_in_nav_menus'   => true,
+		'menu_icon'   		  => 'dashicons-testimonial',
 		'can_export'          => true,
 		'has_archive'         => true,		
 		'exclude_from_search' => false,
@@ -83,6 +84,7 @@ function care_services() {
 		'show_in_admin_bar'   => true,
 		'show_in_nav_menus'   => true,
 		'can_export'          => true,
+		'menu_icon'   		  => 'dashicons-groups',
 		'has_archive'         => true,		
 		'exclude_from_search' => false,
 		'publicly_queryable'  => true,
@@ -92,6 +94,52 @@ function care_services() {
 
 }
 add_action( 'init', 'care_services', 0 );
+
+function carepoint_locations() {
+
+	$labels = array(
+		'name'                => _x( 'Care Point addresses', 'Post Type General Name', 'text_domain' ),
+		'singular_name'       => _x( 'Care Point address', 'Post Type Singular Name', 'text_domain' ),
+		'menu_name'           => __( 'Care Point addresses', 'text_domain' ),
+		'name_admin_bar'      => __( 'Care Point addresses', 'text_domain' ),
+		'parent_item_colon'   => __( 'Parent Item:', 'text_domain' ),
+		'all_items'           => __( 'All Items', 'text_domain' ),
+		'add_new_item'        => __( 'Add New Item', 'text_domain' ),
+		'add_new'             => __( 'Add New', 'text_domain' ),
+		'new_item'            => __( 'New Item', 'text_domain' ),
+		'edit_item'           => __( 'Edit Item', 'text_domain' ),
+		'update_item'         => __( 'Update Item', 'text_domain' ),
+		'view_item'           => __( 'View Item', 'text_domain' ),
+		'search_items'        => __( 'Search Item', 'text_domain' ),
+		'not_found'           => __( 'Not found', 'text_domain' ),
+		'not_found_in_trash'  => __( 'Not found in Trash', 'text_domain' ),
+	);
+	$args = array(
+		'label'               => __( 'Care Point addresses', 'text_domain' ),
+		'description'         => __( 'Care Point addresses', 'text_domain' ),
+		'labels'              => $labels,
+		'supports'            => array( 'title'),
+		'hierarchical'        => true,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'menu_position'       => 8,
+		'show_in_admin_bar'   => true,
+		'show_in_nav_menus'   => true,
+		'can_export'          => true,
+		'has_archive'         => true,		
+		'menu_icon'   		  => 'dashicons-location',
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'capability_type'     => 'page',
+	);
+
+	register_post_type( 'carepoint-adresses', $args );
+
+}
+add_action( 'init', 'carepoint_locations', 0 );
+
+//------- TAXONOMIES ----------//
 
 // Create new Care Advice Taxonomy
 function care_advice_categories() {
