@@ -86,7 +86,7 @@
     echo '</div>';
 
     wp_reset_postdata(); // reset the query
-    
+
 ?>
 
 	</footer>
@@ -95,11 +95,11 @@
 		<div class="container">
 		<h3>Our partners:</h3>
 			<ul>
-				<li><a href=""><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-havering-council.jpg" alt=""></a></li>
-				<li><a href=""><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-family-mosaic.jpg" alt=""></a></li>
-				<li><a href=""><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-nelft-nhs.jpg" alt=""></a></li>
-				<li><a href=""><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-healthwatch.jpg" alt=""></a></li>
-				<li><a href=""><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-havering-ccg.jpg" alt=""></a></li>
+				<li><a href="https://www.havering.gov.uk/Pages/index.aspx" target="_blank"><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-havering-council.jpg" alt=""></a></li>
+				<li><a href="http://www.familymosaic.co.uk/home/index.html" target="_blank"><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-family-mosaic.jpg" alt=""></a></li>
+				<li><a href="http://www.nelft.nhs.uk" target="_blank"><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-nelft-nhs.jpg" alt=""></a></li>
+				<li><a href="http://www.healthwatch.co.uk" target="_blank"><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-healthwatch.jpg" alt=""></a></li>
+				<li><a href="http://www.haveringccg.nhs.uk" target="_blank"><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-havering-ccg.jpg" alt=""></a></li>
 			</ul>
 		</div>
 	</div>
