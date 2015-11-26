@@ -120,35 +120,88 @@ function kriesi_pagination($pages = '', $range = 2)
     }
 }
 
-if( function_exists('acf_add_options_page') ) {
- 
-    $page = acf_add_options_page(array(
-        'page_title'    => 'Theme General Settings',
-        'menu_title'    => 'Theme Settings',
-        'menu_slug'     => 'theme-general-settings',
-        'capability'    => 'edit_posts',
-        'redirect'  => false
-    ));
- 
-}
+//------ CP FOOTER ADDRESSES ------//
 
-if( function_exists('acf_add_options_sub_page') )
+function cp_footer_addresses()
 {
-    acf_add_options_sub_page( 'Footer' );
+    // Lets get the addresses for the footer
+    // 
+    $args = array(
+            'post_type' => 'carepoint-adresses',
+            'posts_per_page' => -1
+        );
+    $footer_query = new WP_Query($args);
+
+
+    // We need to build a new array based on if
+    // an addres has been choosen to be displayed on the footer
+    $addresses = array();
+
+    foreach ($footer_query->get_posts() as $post) {
+
+        if(get_field('show_on_footer', $post->ID, false))
+        {
+            $addresses[] = $post;
+        }
+    }
+
+    $count = count($addresses);
+
+    switch ($count) {
+        case 2:
+            $class = 'two-up-grid';
+            break;
+
+        case 3:
+            $class = 'three-up-grid';
+            break;
+
+        case 4:
+            $class = 'four-up-grid';
+            break;
+        
+        default:
+            $class = 'container';
+            break;
+    }
+
+    // Open the container
+    echo '<div class="'.$class.'">';
+
+    // This loop sets up the layout of the grid
+    // depending on how many addresses need to be posted
+    foreach ($addresses as $address) {
+        
+        echo ($count > 1 ? '<div class="grid">' : NULL);
+        $break = ($count > 1 ? '<br>' : ', ' );
+        $space = ($count > 1 ? '<br>' : '&nbsp;&nbsp;' );
+
+        echo '          <h3>'.$address->post_title.'</h3>';
+        echo '<p>';
+        the_field('address_line_1', $address->ID);
+        echo $break;
+        the_field('address_line_2', $address->ID);
+        echo $break;
+        the_field('address_line_3', $address->ID);
+        echo $break;
+        the_field('post_code', $address->ID);
+        echo '</p>';
+        echo '<p>';
+        echo '<p><strong>Tel: </strong>';
+        the_field('tel');
+        echo '<br>';
+        echo '<strong>Email: </strong>';
+        echo '<a href="'.get_field('email').'">'.get_field('email').'</a>';
+        echo '</p>';
+        echo ($count > 1 ? '</div>' : NULL);
+    }
+
+    echo '</div>';
+
+    wp_reset_postdata(); // reset the query    
 }
 
-/*
-*  Create an advanced sub page called 'Footer' that sits under the General options menu
-*/
-
-if( function_exists('acf_add_options_sub_page') )
-{
-    acf_add_options_sub_page(array(
-        'title' => 'Footer',
-        'parent' => 'options-general.php',
-        'capability' => 'manage_options'
-    ));
-}
+//------ WORDPRESS TINYMCE EDITOR ------//
 
 // Let's stop WordPress re-ordering my categories/taxonomies when I select them    
 function stop_reordering_my_categories($args) {

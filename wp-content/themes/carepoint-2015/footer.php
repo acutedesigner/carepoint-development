@@ -8,11 +8,87 @@
 		</div>
 	</div>
 	<footer class="footer" role="contentinfo">
-		<div class="container">
-			<h3>Care Point Havering</h3>
-			<p>Care Point Family Mosaic, 1st Floor Holgate House, 6 Holgate Court, Western Road, Romford, RM1 3JS</p>
-			<p><strong>Tel:</strong> 01708 776 770<br/><strong>Email:</strong> <a href="mailto:carepoint@familymosaic.co.uk">carepoint@familymosaic.co.uk</a></p>
-		</div>
+
+<?php
+
+    // Lets get the addresses for the footer
+
+    $args = array(
+            'post_type' => 'carepoint-adresses',
+            'posts_per_page' => -1
+        );
+    $footer_query = new WP_Query($args);
+
+
+    // We need to build a new array based on if
+    // an addres has been choosen to be displayed on the footer
+    $addresses = array();
+
+    foreach ($footer_query->get_posts() as $post) {
+
+        if(get_field('show_on_footer', $post->ID, false))
+        {
+            $addresses[] = $post;
+        }
+    }
+
+    $count = count($addresses);
+
+    switch ($count) {
+        case 2:
+            $class = 'two-up-grid';
+            break;
+
+        case 3:
+            $class = 'three-up-grid';
+            break;
+
+        case 4:
+            $class = 'four-up-grid';
+            break;
+        
+        default:
+            $class = 'container';
+            break;
+    }
+
+    // Open the container
+    echo '<div class="'.$class.'">';
+
+    // This loop sets up the layout of the grid
+    // depending on how many addresses need to be posted
+    foreach ($addresses as $address) {
+        
+        echo ($count > 1 ? '<div class="grid">' : NULL);
+        $break = ($count > 1 ? '<br>' : ', ' );
+        $space = ($count > 1 ? '<br>' : '&nbsp;&nbsp;' );
+
+        echo '          <h3>'.$address->post_title.'</h3>';
+        echo '<p>';
+        the_field('address_line_1', $address->ID);
+        echo $break;
+        the_field('address_line_2', $address->ID);
+        echo $break;
+        the_field('address_line_3', $address->ID);
+        echo $break;
+        the_field('post_code', $address->ID);
+        echo '</p>';
+        echo '<p>';
+        echo '<p><strong>Tel: </strong>';
+        the_field('tel');
+        echo '<br>';
+        echo '<strong>Email: </strong>';
+        echo '<a href="'.get_field('email').'">'.get_field('email').'</a>';
+        echo '</p>';
+        echo ($count > 1 ? '</div>' : NULL);
+    }
+
+    echo '</div>';
+
+    wp_reset_postdata(); // reset the query
+    
+?>
+
 	</footer>
 
 	<div class="footer-logos">

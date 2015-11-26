@@ -42,7 +42,18 @@ class emailArticle
 
 	public function __construct()
 	{	
-		$this->process_article();
+		// Check nonce carepoint_email_article
+		
+		if(wp_verify_nonce( $_POST['nonce'], 'carepoint_email_article'))
+		{
+			$this->process_article();
+		}
+		else
+		{
+			$this->message_type = 'error';
+		    $this->message = 'Heeeey! Why is you tryin hmmmmmmmm?';
+		    $this->response_message();			
+		}
 	}
 
 	/**
@@ -111,11 +122,11 @@ class emailArticle
 	 * 
 	 */
 
-	private function send_email()
+	private function send_email($email)
 	{
-		$to = "nigel@acumendesign.co.uk";
+		$to = $email;
 		$subject = $this->post->post_title.' | Havering Care Point';
-		$headers = 'From: My Name <myname@example.com>' . "\r\n";
+		$headers = 'From: Care Point <donotreply@haveringcarepoint.org>' . "\r\n";
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
@@ -136,6 +147,7 @@ class emailArticle
 
 	private function build_html()
 	{
+		$carepoint_logo = CPT_PLUGIN_DIR . 'assets/images/carepoint-logo.png';
 		$excerpt = $this->post->post_excerpt;
 		$post_title = $this->post->post_title;
 		$post_permalink = get_permalink ( $this->post->ID );
@@ -186,7 +198,7 @@ class emailArticle
 
 	    if(count($words) > $excerpt_length) :
 	        array_pop($words);
-	        array_push($words, '…');
+	        array_push($words, '...');
 	        $the_excerpt = implode(' ', $words);
 	    endif;
 
