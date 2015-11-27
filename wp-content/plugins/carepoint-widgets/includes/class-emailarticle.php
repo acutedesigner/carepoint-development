@@ -96,7 +96,7 @@ class emailArticle
 			$email_html = $this->build_html();
 
 			// If article is sent
-			if($this->send_email())
+			if($this->send_email($validated_data['email']))
 			{
 				$this->message_type = 'success';
 			    $this->message = 'The article link has been emailed';				
