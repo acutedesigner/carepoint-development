@@ -44,7 +44,7 @@ class emailArticle
 	{	
 		// Check nonce carepoint_email_article
 		
-		if(wp_verify_nonce( $_POST['nonce'], 'carepoint_email_article'))
+		if(wp_verify_nonce( $_POST['nonce'], 'cp_ea_nonce'))
 		{
 			$this->process_article();
 		}
@@ -183,6 +183,7 @@ class emailArticle
 	/**
 	 *
 	 *	Because Wordpress wont let you get the excerpt outside the loop
+	 *	Silly Wordpress!!
 	 *
 	 * 	@param int $post_id Post id
 	 * 	returns string the excerpt
@@ -228,7 +229,7 @@ function cp_emailarticle_form($post_id)
 			<p>Please enter the email address you want to send this article to:</p>
 			<form action="" method="post">
 				<input name="email" type="text">
-				<input name="nonce" type="hidden" value="$nonc">
+				<input name="nonce" type="hidden" value="$nonce">
 				<input name="post_id" type="hidden" value="$post_id">
 				<input name="action" type="hidden" value="email_article">
 				<input class="btn red-grad" type="submit">
