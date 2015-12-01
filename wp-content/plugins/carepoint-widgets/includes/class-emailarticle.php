@@ -8,30 +8,8 @@ class emailArticle
 	 *  
 	 *  EMAIL ARTICLE
 	 * 
-	 *  This class will allow a user to email a link of the article to an email address of their choice
-	 *  First we need to capture the post data
-	 *  $post_id
-	 *  $email_address
-	 *
-	 * 	Then we need to vaildate the email address
-	 *
-	 * 		If the validation fails
-	 * 		
-	 *   		then we need to send back an error message: "This email is not valid"
-	 * 		
-	 * 		else
-	 * 			
-	 * 			we get the article data and build the HTML email
-	 *
-	 * 				If article is sent
-	 *
-	 * 					Send back an success message: "Your email has been sent"
-	 *
-	 * 				else
-	 *
-	 * 					Send back an error message: "There was an error sending your email"
-	 *
-	 * 		
+	 *  This class will allow a user to email a link of the article
+	 *  to an email address of their choice  
 	 * 
 	 */
 
@@ -147,7 +125,8 @@ class emailArticle
 
 	private function build_html()
 	{
-		$carepoint_logo = CPT_PLUGIN_DIR . 'assets/images/carepoint-logo.png';
+		$carepoint_logo = plugins_url( 'assets/images/carepoint-logo.jpg', __FILE__ );
+		echo $carepoint_logo;
 		$excerpt = $this->post->post_excerpt;
 		$post_title = $this->post->post_title;
 		$post_permalink = get_permalink ( $this->post->ID );

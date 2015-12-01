@@ -13,6 +13,7 @@
 
 				<h1><?php the_title(); ?></h1>	
 				<?php the_content(); ?>
+				<?php if ( get_field('nhs_widget_code') ){ the_field('nhs_widget_code'); }?>
 				<?php
 
 				// Lets get the linked address if available
@@ -39,8 +40,8 @@
 				    	<?php if(get_field('tel') || get_field('email')){ ?>
 				    	<p>
 				    	<?php
-			    			$contact = ( get_field('tel') ? '<strong>Tel: </strong>'.get_field('tel').'<br/>' : NULL);
-			    			$contact .= ( get_field('email') ? '<strong>Email: </strong>'.get_field('email') : NULL);
+			    			$contact = ( get_field('tel') ? '<strong>Tel: </strong><a href="tel:'.get_field('tel').'">'.get_field('tel').'</a><br/>' : NULL);
+			    			$contact .= ( get_field('email') ? '<strong>Email: </strong><a href="mailto:'.get_field('email').'">'.get_field('email').'</a>' : NULL);
 			    			echo $contact;
 						?>
 				    	</p>
