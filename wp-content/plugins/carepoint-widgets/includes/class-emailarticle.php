@@ -126,7 +126,6 @@ class emailArticle
 	private function build_html()
 	{
 		$carepoint_logo = plugins_url( 'assets/images/carepoint-logo.jpg', __FILE__ );
-		echo $carepoint_logo;
 		$excerpt = $this->post->post_excerpt;
 		$post_title = $this->post->post_title;
 		$post_permalink = get_permalink ( $this->post->ID );
@@ -211,7 +210,7 @@ function cp_emailarticle_form($post_id)
 				<input name="nonce" type="hidden" value="$nonce">
 				<input name="post_id" type="hidden" value="$post_id">
 				<input name="action" type="hidden" value="email_article">
-				<input class="btn red-grad" type="submit">
+				<input class="btn red-grad" type="submit" value="Email article">
 			</form>
 			<hr/>
 			<a class="btn blue-grad email-form-button" href="#">Hide form <i class="fa fa-close"></i></a>

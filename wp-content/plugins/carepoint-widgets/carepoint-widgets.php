@@ -3,7 +3,7 @@
 Plugin Name: Carepoint Functions
 Plugin URI: http://www.acumendesign.co.uk
 Description: A collections of features and function exclusive for the Havering Care Point Website
-Version: 1.0
+Version: 0.1
 Author: @acute_designer
 Author Nigel M Peters
 License: GPL2
