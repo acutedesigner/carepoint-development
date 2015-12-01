@@ -61,7 +61,7 @@
 				
 				<?php if(get_field('nhs_choices') != ""): ?>
 				<div class="nhs-choices-label">
-					<small>This article is sourced from:</small>
+					<small>This content is sourced from:</small>
 					<img src="<?php bloginfo("template_url"); ?>/library/images/nhs-choices-logo.jpg" alt="NHS Choices">
 				</div>
 				<?php endif; ?>
