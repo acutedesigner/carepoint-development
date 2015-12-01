@@ -24,7 +24,7 @@ $this->html_email = <<<EOT
 	  		<tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
 	  			<td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; margin: 0; padding: 0;">
 	  				<!-- CAREPOINT LOGO -->
-            <img src="$carepoint_logo" style="max-width: 600px; width: 100%; margin: 0; padding: 0;">
+            <img src="$carepoint_logo" style="margin: 0; padding: 0;">
 	  			</td>
 	  		</tr>
 			<!-- KEYLINE -->

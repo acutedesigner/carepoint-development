@@ -7,13 +7,34 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		
-		<title><?php wp_title(''); ?></title>
+		<title><?php
+		/*
+		* Print the <title> tag based on what is being viewed.
+		*/
+		global $page, $paged;
+		 
+		wp_title( '|', true, 'right' );
+		 
+		// Add the blog name.
+		bloginfo( 'name' );
+		 
+		// Add the blog description for the home/front page.
+		$site_description = get_bloginfo( 'description', 'display' );
+		if ( $site_description && ( is_home() || is_front_page() ) )
+		echo " | $site_description";
+		 
+		// Add a page number if necessary:
+		if ( $paged >= 2 || $page >= 2 )
+		echo ' | ' . sprintf( __( 'Page %s', 'shape' ), max( $paged, $page ) );
+		 
+		?></title>
 
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 		<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/css/main.css" media="all" />
 		<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/css/font-awesome.min.css" media="all" />	
+		<link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" media="all" />	
 
 		<script src="<?php bloginfo("template_directory"); ?>/library/js/modernizr.js"></script>
 
@@ -29,7 +50,7 @@
 	<body  <?php body_class(); ?> >
 		<div class="wrapper">
 
-			<header class="header" role="banner">
+			<header class="header">
 				<div class="logo">
 					<a href="<?php bloginfo("url"); ?>"><img src="<?php bloginfo("template_directory"); ?>/library/images/carepoint-logo.png" alt="Care Point Logo" /></a>
 				</div>
@@ -69,7 +90,7 @@
 			?>			
 			<div class="block-form" <?php echo ( is_search() ? 'style="display: block;"' : NULL ); ?>>
 				<div class="container">
-					<form role="search" method="get" action="<?php bloginfo("url"); ?>">
+					<form method="get" action="<?php bloginfo("url"); ?>">
 						<div class="search-form-select">
 							<label>I am looking for:</label>
 

@@ -7,7 +7,7 @@
 			<p>Get in touch with us on: <a href="tel:01708 776770">01708 776770</a> or online <a href="<?php echo site_url('/feedback-forms'); ?>" class="btn violet-grad">Feedback forms <i class="fa fa-commenting"></i></a></p>	
 		</div>
 	</div>
-	<footer class="footer" role="contentinfo">
+	<footer class="footer">
 
 <?php
 
@@ -81,7 +81,7 @@
         echo '<a href="'.get_field('email').'">'.get_field('email').'</a>';
         echo '</p>';
         echo ($count > 1 ? '</div>' : NULL);
-    }
+}
 
     echo '</div>';
 
@@ -104,7 +104,7 @@
 		</div>
 	</div>
 
-	<nav class="footer-nav" role="navigation">
+	<nav class="footer-nav">
 		<?php wp_nav_menu( array('theme_location' => 'footer_menu', 'container' => 'div', 'container_class' => 'container')); ?>
 	</nav>
 	<!-- End Footer -->
