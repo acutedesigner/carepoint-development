@@ -60,7 +60,7 @@
 						<li><a class="tooltip atoz-toggle" title="A to Z" href="#">A to Z</a></li>		
 						<?php echo cp_view_bookmarks_button(); ?>
 						<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>
-						<div id="__ba_panel"></div>		
+						<li><div id="__ba_panel"></div></li>	
 					</ul>
 				</nav>
 			</header>
@@ -70,7 +70,8 @@
 				<ul class="mini-menu">
 					<li><a class="tooltip" title="Contact us" href="<?php echo home_url( '/contact-us' ) ?>"><i class="fa fa-phone"></i></a></li>		
 					<li><a class="tooltip atoz-toggle" title="A to Z" href="#"><i class="fa fa-book"></i></a></li>		
-					<li><a class="tooltip" title="Browse Aloud" href="#"><i class="fa fa-headphones"></i></a></li>		
+					<li><a class="tooltip" title="Browse Aloud" href="#"><i class="fa fa-headphones"></i></a></li>
+					<li><div id="__ba_panel"></div></li>		
 					<?php echo cp_view_bookmarks_button(); ?>
 					<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
 				</ul>
