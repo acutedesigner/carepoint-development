@@ -55,8 +55,6 @@
 					<a href="<?php bloginfo("url"); ?>"><img src="<?php bloginfo("template_directory"); ?>/library/images/carepoint-logo.png" alt="Care Point Logo" /></a>
 				</div>
 				<nav class="header-nav">
-					<script type="text/javascript">var _baLocale = 'uk', _baUseCookies = true, _baMode = '<?php bloginfo("template_directory"); ?>/library/images/cp-browsealoud-logo.jpg', _baHiddenMode = false, _baHideOnLoad = false;</script>
-					<script type="text/javascript" src="//www.browsealoud.com/plus/scripts/ba.js"></script>
 					<ul class="mini-menu">
 						<li><a class="tooltip" title="Contact Us" href="<?php echo home_url( '/contact-us' ) ?>">Contact Us</a></li>		
 						<li><a class="tooltip atoz-toggle" title="A to Z" href="#">A to Z</a></li>		
@@ -69,10 +67,10 @@
 
 			<nav class="primary-nav" id="nav">
 				<ul class="mini-menu">
-					<li><a class="tooltip" title="Contact Us" href="<?php echo home_url( '/contact-us' ) ?>"><i class="fa fa-phone"></i></a></li>		
+					<li><a class="tooltip" title="Contact us" href="<?php echo home_url( '/contact-us' ) ?>"><i class="fa fa-phone"></i></a></li>		
 					<li><a class="tooltip atoz-toggle" title="A to Z" href="#"><i class="fa fa-book"></i></a></li>		
 					<li><a class="tooltip" title="Browse Aloud" href="#"><i class="fa fa-headphones"></i></a></li>		
-					<li><a class="tooltip" title="Your saved articles" href="#"><i class="fa fa-list-ul"></i></a></li>		
+					<?php echo cp_view_bookmarks_button(); ?>
 					<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
 				</ul>
 				<a class="to-main-nav" href="#main-nav">Menu <i class="fa fa-bars"></i></a>
@@ -88,7 +86,7 @@
 				$post_type = ( $_REQUEST['search_type'] ? $_REQUEST['search_type'] : NULL );
 				$term = ( get_query_var('s') ? get_query_var('s') : NULL );
 			?>			
-			<div class="block-form" <?php echo ( is_search() ? 'style="display: block;"' : NULL ); ?>>
+			<div class="block-form" <?php echo ( is_search() || is_404() ? 'style="display: block;"' : NULL ); ?>>
 				<div class="container">
 					<form method="get" action="<?php bloginfo("url"); ?>">
 						<div class="search-form-select">
