@@ -271,11 +271,13 @@ class CPT_Homepage_Carousel extends WP_Widget
 
 		<li>
 			<?php echo wp_get_attachment_image( $image, "full" ); ?>
+			<?php if($content == "" && $title == ""): NULL; else: ?>
 			<div class="textblock">
 				<h2><?php echo $title; ?></h2>
 				<p><?php echo $content; ?></p>
 				<?php if($link != ""): ?><a href="<?php echo $link; ?>" class="btn violet-grad">Read more</a><?php endif; ?>
 			</div>
+			<?php endif; ?>
 		</li>
 
 	<?php
