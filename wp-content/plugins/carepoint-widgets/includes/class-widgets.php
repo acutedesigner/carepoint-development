@@ -205,6 +205,8 @@ class CPT_Homepage_Carousel extends WP_Widget
 	function form($instance)
 	{
 		
+		
+		print_r($instance);
 		extract($instance);
 
 		$selected_image = $instance['image'];
@@ -227,7 +229,7 @@ class CPT_Homepage_Carousel extends WP_Widget
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php _e( 'Select image:' ); ?></label>
-			<select name="<?php echo $this->get_field_name( 'image' ); ?>"><?php echo $options[0]; ?></select>
+			<select class="widefat" name="<?php echo $this->get_field_name( 'image' ); ?>"><?php echo $options[0]; ?></select>
 		</p>
 	
 		<p>
@@ -258,6 +260,28 @@ class CPT_Homepage_Carousel extends WP_Widget
 		</p>
 
 		<?php
+
+			// Create the array with the options
+			$textblock_positions = array(
+				"tbright" => "Position to the right",
+				"tbleft" => "Position to the left"
+			);
+
+			// Add options to the select options
+			$postitions = NULL;
+
+			foreach($textblock_positions as $tb_value => $tb_position)
+			{
+				$positions .= '<option value="'.$tb_value.'" '.(isset($position) && $tb_value == $position ? 'selected' : NULL ).'>'.$tb_position.'</option>';
+			}
+		?>
+
+		<p>
+			<label for="<?php echo $this->get_field_id( 'position' ); ?>"><?php _e( 'Position' ); ?></label>
+			<select class="widefat" name="<?php echo $this->get_field_name( 'position' ); ?>"><?php echo $positions; ?></select>
+		</p>
+
+		<?php
 		else:
 			echo 'There are no images in the media library. Click <a href="' . admin_url('/media-new.php') . '" title="Add Images">here</a> to add some images';
 		endif;
@@ -272,7 +296,7 @@ class CPT_Homepage_Carousel extends WP_Widget
 		<li>
 			<?php echo wp_get_attachment_image( $image, "full" ); ?>
 			<?php if($content == "" && $title == ""): NULL; else: ?>
-			<div class="textblock">
+			<div class="textblock <?php echo $position; ?>">
 				<h2><?php echo $title; ?></h2>
 				<p><?php echo $content; ?></p>
 				<?php if($link != ""): ?><a href="<?php echo $link; ?>" class="btn violet-grad">Read more</a><?php endif; ?>
