@@ -70,7 +70,7 @@
 				<ul class="mini-menu">
 					<li><a class="tooltip" title="Contact us" href="<?php echo home_url( '/contact-us' ) ?>"><i class="fa fa-phone"></i></a></li>		
 					<li><a class="tooltip atoz-toggle" title="A to Z" href="#"><i class="fa fa-book"></i></a></li>		
-					<li><a class="_ba_logo" href="javascript:;" onclick="BrowseAloud.panel.toggleBar(event);return false;" title="Listen with browsealoud"><i class="fa fa-headphones"></i></a></li>		
+					<li><a class="_ba_logo tooltip" href="javascript:;" onclick="BrowseAloud.panel.toggleBar(event);return false;" title="Listen with browsealoud"><i class="fa fa-headphones"></i></a></li>		
 					<?php echo cp_view_bookmarks_button(); ?>
 					<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
 				</ul>
