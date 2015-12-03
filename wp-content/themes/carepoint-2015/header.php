@@ -59,7 +59,8 @@
 						<li><a class="tooltip" title="Contact Us" href="<?php echo home_url( '/contact-us' ) ?>">Contact Us</a></li>		
 						<li><a class="tooltip atoz-toggle" title="A to Z" href="#">A to Z</a></li>		
 						<?php echo cp_view_bookmarks_button(); ?>
-						<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>		
+						<li><a class="tooltip search-toggle" title="Search" href="#"><i class="fa fa-search"></i></a></li>
+						<div id="__ba_panel"></div>		
 					</ul>
 				</nav>
 			</header>
