@@ -205,8 +205,6 @@ class CPT_Homepage_Carousel extends WP_Widget
 	function form($instance)
 	{
 		
-		
-		print_r($instance);
 		extract($instance);
 
 		$selected_image = $instance['image'];
