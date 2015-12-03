@@ -206,25 +206,25 @@ class CPT_Homepage_Carousel extends WP_Widget
 	{
 		
 		extract($instance);
-		//$instance = wp_parse_args((array) $instance, array('link1' => '', 'link2' => ''));
-		$link1 = $instance['link1'];
-		$images = new WP_Query( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'post_mime_type' => 'image' , 'posts_per_page' => -1 ) );
-		
-		if( $images->have_posts() )
-		{
 
-			$options = array();
-			for( $i = 0; $i < 2; $i++ )
-			{
+		$selected_image = $instance['image'];
+		$images = new WP_Query( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'post_mime_type' => 'image' , 'posts_per_page' => -1 ) );
+
+
+		$options = array();
+
+		if ( $images->have_posts() ):
+
+			for( $i = 0; $i < 2; $i++ ):
+
 				$options[$i] = '';
-				while( $images->have_posts() )
-				{
-					$images->the_post();
-					$img_src = wp_get_attachment_image_src(get_the_ID(), "full");
-					$the_link = ( $i == 0 ) ? $link1 : $link2;
-					$options[$i] .= '<option value="' . $img_src[0] . '" ' . selected( $the_link, $img_src[0], false ) . '>' . get_the_title() . '</option>';
-				} 
-			} ?>
+				while ( $images->have_posts() ) : $images->the_post();
+					$options[$i] .= '<option value="' . get_the_ID() . '" ' . selected( $selected_image, get_the_ID(), false ) . '>' . get_the_title() . '</option>';
+				endwhile;
+
+			endfor;
+		
+		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php _e( 'Select image:' ); ?></label>
 			<select name="<?php echo $this->get_field_name( 'image' ); ?>"><?php echo $options[0]; ?></select>
@@ -258,19 +258,10 @@ class CPT_Homepage_Carousel extends WP_Widget
 		</p>
 
 		<?php
-		}
-		else
-		{
+		else:
 			echo 'There are no images in the media library. Click <a href="' . admin_url('/media-new.php') . '" title="Add Images">here</a> to add some images';
-		}
+		endif;
 	}
-
-	// function update( $new_instance, $old_instance ) {
-	// 	// processes widget options to be saved
-	// 	$instance = $old_instance;
-	// 	$instance['link1'] = $new_instance['link1'];
-	// 	return $instance;
-	// }
 
 	function widget($args,$instance)
 	{
@@ -279,11 +270,11 @@ class CPT_Homepage_Carousel extends WP_Widget
 	?>
 
 		<li>
-			<img src="<?php echo $image; ?>" />
+			<?php echo wp_get_attachment_image( $image, "full" ); ?>
 			<div class="textblock">
 				<h2><?php echo $title; ?></h2>
 				<p><?php echo $content; ?></p>
-				<a href="<?php echo $link; ?>" class="btn violet-grad">Read more</a>
+				<?php if($link != ""): ?><a href="<?php echo $link; ?>" class="btn violet-grad">Read more</a><?php endif; ?>
 			</div>
 		</li>
 

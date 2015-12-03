@@ -93,7 +93,7 @@
 
 	<div class="footer-logos">
 		<div class="container">
-		<h3>Our partners:</h3>
+		<h4>Our partners:</h4>
 			<ul>
 				<li><a href="https://www.havering.gov.uk/Pages/index.aspx" target="_blank"><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-havering-council.jpg" alt=""></a></li>
 				<li><a href="http://www.familymosaic.co.uk/home/index.html" target="_blank"><img src="<?php bloginfo("template_directory"); ?>/library/images/logo-family-mosaic.jpg" alt=""></a></li>
@@ -108,6 +108,9 @@
 		<?php wp_nav_menu( array('theme_location' => 'footer_menu', 'container' => 'div', 'container_class' => 'container')); ?>
 	</nav>
 	<!-- End Footer -->
+
+	<script type="text/javascript">var _baLocale = 'uk', _baUseCookies = true, _baMode = '<?php bloginfo("template_directory"); ?>/library/images/cp-browsealoud-logo.jpg', _baHiddenMode = false, _baHideOnLoad = false;</script>
+	<script type="text/javascript" src="//www.browsealoud.com/plus/scripts/ba.js"></script>
 
 	<script src="<?php bloginfo("template_directory"); ?>/library/js/jquery.tooltipster.min.js"></script>
 	<script src="<?php bloginfo("template_directory"); ?>/library/js/bxslider/jquery.bxslider.min.js"></script>
@@ -139,6 +142,8 @@
 				$('.block-atoz-index').slideToggle();
 			});
 
+			
+
 			//------ EMAIL FORM ------//
 			$('.email-form-button').click(function(e){
 				e.preventDefault();
@@ -146,9 +151,9 @@
 			});
 
 			$('.bxslider').bxSlider({
+			  adaptiveHeight: true,
 			  auto: true,
 			  mode: 'fade',
-			  speed: 4000,
 			  captions: true,
 			  controls: false
 			});
@@ -166,6 +171,54 @@
 			}
 			
 		});
+
+		jQuery(window).load(function(){
+
+
+			// http://codepen.io/micahgodbolt/pen/FgqLc
+			// NOTE! Refactor this code
+
+			//------ EQUAL HEIGHTS HOME PAGE -----//
+			
+			// Get all the heights and store them in an array
+			home_arr = new Array();
+
+			jQuery('.block-thumb').find('.text-block').each(function(index){
+				home_arr.push( jQuery( this ).height()+20 );
+			});
+
+			// Sort the array | Get the new height
+			newheight = home_arr.sort(function(a, b){return a-b}).pop();
+
+			// Apply the height value of the tallest to
+			// all elements other elements of that type
+			jQuery('.block-thumb').find('.text-block').css('min-height', newheight)
+
+
+			//------ EQUAL HEIGHTS LANDING PAGES -----//
+			
+			// Get all the heights and store them in an array
+			land_arr = new Array();
+
+			jQuery('.text-block-green, .text-block-blue').each(function(index){
+				land_arr.push( jQuery( this ).height()+20 );
+			});
+
+			console.log(land_arr.sort(function(a, b){return a-b}));
+
+			// Sort the array | Get the new height
+			newheight = land_arr.sort(function(a, b){return a-b}).pop();
+
+			// Apply the height value of the tallest to
+			// all elements other elements of that type
+			jQuery('.text-block-green, .text-block-blue').css('height', newheight)
+
+
+
+		});
+
+
+
 	</script>
 
 		<?php wp_footer(); ?>

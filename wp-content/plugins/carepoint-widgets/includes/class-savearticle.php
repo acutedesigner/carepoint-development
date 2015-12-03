@@ -174,7 +174,10 @@ class carepointSaveArticle
 		}
 		else
 		{
-			echo "We have nothing";
+			get_header();
+			include(CPT_PLUGIN_DIR . '/views/' . 'saved-article-list.php');	
+			get_footer();
+			exit();
 		}
 
 	}
