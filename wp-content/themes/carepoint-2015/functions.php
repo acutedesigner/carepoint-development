@@ -233,3 +233,10 @@ function printme($array)
 		print_r($array);
 	echo '</pre>';	
 }
+
+//------ EDITOR CSS ------//
+
+function my_theme_add_editor_styles() {
+    add_editor_style( 'custom-editor-style.css' );
+}
+add_action( 'admin_init', 'my_theme_add_editor_styles' );
