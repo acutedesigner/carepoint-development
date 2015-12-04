@@ -125,7 +125,6 @@ class emailArticle
 
 	private function build_html()
 	{
-		echo bloginfo('template_url').'/library/images/carepoint-logo.jpg';
 		$carepoint_logo = bloginfo('template_url').'/library/images/carepoint-logo.jpg';
 		$excerpt = $this->post->post_excerpt;
 		$post_title = $this->post->post_title;
