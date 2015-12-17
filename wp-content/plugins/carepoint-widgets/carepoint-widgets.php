@@ -13,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 define("CPT_VERSION_NUMBER", "0.1");
 define("CPT_PLUGIN_DIR", plugin_dir_path(__FILE__)); 
+define("CPT_PLUGIN_URL", plugin_dir_url( __FILE__ )); 
 
 // Setup db table name
 global $wpdb;
@@ -69,4 +70,19 @@ function carepoint_activation()
 	dbDelta( $create_sql );
 
 	add_option( 'carepoint_functions', CPT_VERSION_NUMBER );
+}
+
+//------ DASH BOARD WIDGET ------//
+
+add_action('wp_dashboard_setup', 'my_custom_dashboard_widgets');
+ 
+function my_custom_dashboard_widgets() {
+global $wp_meta_boxes;
+
+wp_add_dashboard_widget('custom_help_widget', 'Care Point website user guide', 'carepoint_userguide');
+}
+
+function carepoint_userguide() {
+    echo '<p>A user guide on how to use some of the unique features of the website</p>';
+    echo '<p><a class="button button-primary" href="'.CPT_PLUGIN_URL.'assets/files/care-point-user-guide.pdf">Download Here</a></p>';
 }
