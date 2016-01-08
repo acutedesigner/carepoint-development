@@ -36,6 +36,7 @@
 		<link rel="stylesheet" href="<?php bloginfo("template_directory"); ?>/library/css/font-awesome.min.css" media="all" />	
 		<link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" media="all" />	
 
+		<link rel="shortcut icon" type="image/x-icon" href="<?php bloginfo("template_directory") ?>/favicon.ico">
 		<script src="<?php bloginfo("template_directory"); ?>/library/js/modernizr.js"></script>
 
 		<!--[if IE 8]>
