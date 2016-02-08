@@ -4,7 +4,7 @@
 	<!-- Begin Footer -->
 	<div class="contact-bar">
 		<div class="container">
-			<p>Get in touch with us on: <a href="tel:01708 776770">01708 776770</a> or online <a href="<?php echo site_url('/feedback-forms'); ?>" class="btn violet-grad">Feedback forms <i class="fa fa-commenting"></i></a></p>	
+			<p>Get in touch with us on: <a href="tel:01708 776770">01708 776770</a> or online <a href="<?php echo site_url('/feedback-forms'); ?>" class="btn violet-grad">Feedback forms <i class="fa fa-commenting"></i></a></p>
 		</div>
 	</div>
 	<footer class="footer">
@@ -46,7 +46,7 @@
         case 4:
             $class = 'four-up-grid';
             break;
-        
+
         default:
             $class = 'container';
             break;
@@ -58,7 +58,7 @@
     // This loop sets up the layout of the grid
     // depending on how many addresses need to be posted
     foreach ($addresses as $address) {
-        
+
         echo ($count > 1 ? '<div class="grid">' : NULL);
         $break = ($count > 1 ? '<br>' : ', ' );
         $space = ($count > 1 ? '<br>' : '&nbsp;&nbsp;' );
@@ -78,7 +78,7 @@
         the_field('tel');
         echo '<br>';
         echo '<strong>Email: </strong>';
-        echo '<a href="'.get_field('email').'">'.get_field('email').'</a>';
+        echo '<a href="mailto:'.get_field('email').'">'.get_field('email').'</a>';
         echo '</p>';
         echo ($count > 1 ? '</div>' : NULL);
 }
@@ -118,7 +118,7 @@
 	<script>
 		// You will need this for the menu toggle
 		jQuery(document).ready(function($){
-		
+
 			//------ MAIN MENU ------//
 			$('.to-main-nav').click(function(e) {
 				e.preventDefault();
@@ -127,7 +127,7 @@
 			$(window).resize(function(){
 				var winwidth = $(window).innerWidth();
 				if(winwidth > 900){
-					$('#primary-nav').removeAttr("style");    
+					$('#primary-nav').removeAttr("style");
 				}
 			});
 
@@ -136,13 +136,13 @@
 				e.preventDefault();
 				$('.block-form').slideToggle();
 			});
-			
+
 			$('.atoz-toggle').click(function(e){
 				e.preventDefault();
 				$('.block-atoz-index').slideToggle();
 			});
 
-			
+
 
 			//------ EMAIL FORM ------//
 			$('.email-form-button').click(function(e){
@@ -159,7 +159,7 @@
 			});
 
 			//------ TOOLTIPS ------//
-			
+
 			$('.tooltip').tooltipster({
 				multiple:true
 			});
@@ -169,7 +169,7 @@
 					$('*:last-child').addClass('last-child');
 				}
 			}
-			
+
 		});
 
 		jQuery(window).load(function(){
@@ -179,7 +179,7 @@
 			// NOTE! Refactor this code
 
 			//------ EQUAL HEIGHTS HOME PAGE -----//
-			
+
 			// Get all the heights and store them in an array
 			home_arr = new Array();
 
@@ -196,7 +196,7 @@
 
 
 			//------ EQUAL HEIGHTS LANDING PAGES -----//
-			
+
 			// Get all the heights and store them in an array
 			land_arr = new Array();
 
