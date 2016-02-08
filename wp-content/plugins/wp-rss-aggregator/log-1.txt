@@ -1,0 +1,51 @@
+[29-01-2016 10:42:49] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[30-01-2016 10:43:16] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[31-01-2016 10:43:11] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[01-02-2016 10:38:29] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[02-02-2016 10:41:38] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[03-02-2016 10:45:48] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/carers'-rights/articles/young-carers-rights.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[03-02-2016 16:33:30] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/livewell/topics/alcohol/alcoholsupport?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/livewell/topics/alcohol/alcoholsupport?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[03-02-2016 16:33:37] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/livewell/topics/alcohol/alcoholsupport?apikey=ENHSUADG". This XML document is invalid, likely due to invalid characters. XML error: Not well-formed (invalid token) at line 1, column 1
+
+
+[03-02-2016 16:33:59] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/livewell/topics/alcohol/alcoholsupport?apikey=ENHSUADG". This XML document is invalid, likely due to invalid characters. XML error: Not well-formed (invalid token) at line 1, column 1
+
+
+[06-02-2016 10:45:05] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/money-and-your-rights/categories/funding-care/articles/local-authority-funding-for-care.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/money-and-your-rights/categories/funding-care/articles/local-authority-funding-for-care.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[07-02-2016 10:56:06] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/money-and-your-rights/categories/funding-care/articles/local-authority-funding-for-care.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/money-and-your-rights/categories/funding-care/articles/local-authority-funding-for-care.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
+[08-02-2016 10:42:55] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/money-and-your-rights/categories/funding-care/articles/local-authority-funding-for-care.rss?apikey=ENHSUADG". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/money-and-your-rights/categories/funding-care/articles/local-authority-funding-for-care.rss?apikey=ENHSUADG. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+[08-02-2016 11:26:46] [Error] WPRSS > wprss_get_feed_items:
+Failed to fetch feed "http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/caring-issues/articles/parenting-children-with-complex-needs?apikey=ENHSUADG&what=representations". A feed could not be found at http://v1.syndication.nhschoices.nhs.uk/guides/social-care-and-support-guide/topics/for-carers/categories/caring-issues/articles/parenting-children-with-complex-needs?apikey=ENHSUADG&what=representations. A feed with an invalid mime type may fall victim to this error, or SimplePie was unable to auto-discover it.. Use force_feed() if you are certain this URL is a real feed.
+
+
