@@ -3,8 +3,6 @@
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a {margin: 10px;}
 
-
-
 body#tinymce.wp-editor.h1 {
   font-size: 2.25em;
   line-height: 1.2;
@@ -45,9 +43,12 @@ body#tinymce.wp-editor.small {
   font-family: "montserratregular", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 0.8125em; }
 
+/* Editor ul list styles  */
 ul, ol{
   margin-left: 25px;
+  margin-bottom: 20px;
   padding: 0;
-  list-style: disc;
   font-size: 1em;
 }
+ul{ list-style-type: disc; }
+ol{	list-style-type: decimal; }

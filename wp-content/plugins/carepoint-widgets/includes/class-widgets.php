@@ -7,16 +7,16 @@ class CPT_Textbox_Widget extends WP_Widget
 	var $sb_widget_count = 0;
 
 	function __construct()
-	{	
-		$options = array( 
-		
+	{
+		$options = array(
+
 			'description' => 'To allow the text on the homepage to be updated. 2 Items Max',
 			'name' 	=> 'CPT Textbox Widget',
 		);
-		
-		parent::__construct('CPT_Textbox_Widget','',$options);	
+
+		parent::__construct('CPT_Textbox_Widget','',$options);
 	}
-	
+
 	public function form($instance)
 	{
 		extract($instance);
@@ -25,7 +25,7 @@ class CPT_Textbox_Widget extends WP_Widget
 		?>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 			<input	class="widefat"
 					id="<?php echo $this->get_field_id( 'title' ); ?>"
 					name="<?php echo $this->get_field_name( 'title' ); ?>"
@@ -67,7 +67,7 @@ class CPT_Textbox_Widget extends WP_Widget
 			>
 		</p>
 
-		<?php		
+		<?php
 	}
 
 	function widget($args,$instance)
@@ -78,7 +78,7 @@ class CPT_Textbox_Widget extends WP_Widget
 
 		// Count the array
 		$this->sb_widget_count = count($sidebars_widgets[$args['id']]);
-		
+
 		extract($instance);
 
 		$class = array ( 'left-column' , 'right-column' );
@@ -118,28 +118,28 @@ class CPT_Textbox_Widget extends WP_Widget
 		{
 			$this->widget_counter = 0;
 		}
-	}	
+	}
 }
 
 class CPT_Category_Block extends WP_Widget
 {
 	function __construct()
-	{	
-		$options = array( 
-		
+	{
+		$options = array(
+
 			'description' => 'This is for the category blocks. Please ensure you have choosen a category image',
-			'name' 	=> 'Care Point Category Block'		
+			'name' 	=> 'Care Point Category Block'
 		);
-		
-		parent::__construct('CPT_Category_Block','',$options);	
+
+		parent::__construct('CPT_Category_Block','',$options);
 	}
-	
+
 	public function form($instance)
 	{
 		extract($instance);
 			$cat_args = array(
 			'parent '       => 0,
-			'hide_empty'    => false,           
+			'hide_empty'    => false,
 		);
 
 		$care_advice_categories = get_terms( 'care-advice-categories' , $cat_args);
@@ -156,11 +156,11 @@ class CPT_Category_Block extends WP_Widget
 			<?php if ($category->parent == 0): ?>
 				<option <?php echo (isset($category_block) && $category->term_id.':'.$category->taxonomy == $category_block ? "selected" : NULL); ?> value="<?php echo $category->term_id.':'.$category->taxonomy; ?>"><?php echo $category->name; ?></option>
 			<?php endif; ?>
-			<?php endforeach; ?>				
+			<?php endforeach; ?>
 			</select>
 		</p>
 
-		<?php	
+		<?php
 	}
 
 	function widget($args,$instance)
@@ -171,7 +171,7 @@ class CPT_Category_Block extends WP_Widget
 		$category_block = explode(':', $category_block);
 
 		$term = get_term_by( 'id', $category_block[0], $category_block[1] );
-		
+
 		?>
 
 		<div class="grid">
@@ -186,25 +186,25 @@ class CPT_Category_Block extends WP_Widget
 		</div>
 
 		<?php
-	}	
+	}
 }
 
 class CPT_Homepage_Carousel extends WP_Widget
 {
 	function __construct()
-	{	
-		$options = array( 
-		
+	{
+		$options = array(
+
 			'description' => 'This allows you to select items for the Homepage carousel.',
-			'name' 	=> 'Care Point Homepage carousel'		
+			'name' 	=> 'Care Point Homepage carousel'
 		);
-		
-		parent::__construct('CPT_Homepage_Carousel','',$options);	
+
+		parent::__construct('CPT_Homepage_Carousel','',$options);
 	}
 
 	function form($instance)
 	{
-		
+
 		extract($instance);
 
 		$selected_image = $instance['image'];
@@ -223,15 +223,15 @@ class CPT_Homepage_Carousel extends WP_Widget
 				endwhile;
 
 			endfor;
-		
+
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'image' ); ?>"><?php _e( 'Select image:' ); ?></label>
 			<select class="widefat" name="<?php echo $this->get_field_name( 'image' ); ?>"><?php echo $options[0]; ?></select>
 		</p>
-	
+
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 			<input	class="widefat"
 					id="<?php echo $this->get_field_id( 'title' ); ?>"
 					name="<?php echo $this->get_field_name( 'title' ); ?>"
@@ -254,7 +254,7 @@ class CPT_Homepage_Carousel extends WP_Widget
 					name="<?php echo $this->get_field_name( 'link' ); ?>"
 					type="text"
 					value="<?php if(isset($link)) echo esc_attr( $link ); ?>"
-			>			
+			>
 		</p>
 
 		<?php

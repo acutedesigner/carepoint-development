@@ -5,12 +5,12 @@ if(!class_exists('emailArticle')){
 class emailArticle
 {
 	/**
-	 *  
+	 *
 	 *  EMAIL ARTICLE
-	 * 
+	 *
 	 *  This class will allow a user to email a link of the article
-	 *  to an email address of their choice  
-	 * 
+	 *  to an email address of their choice
+	 *
 	 */
 
 	var $message;
@@ -19,18 +19,18 @@ class emailArticle
 	var $html_email;
 
 	public function __construct()
-	{	
+	{
 		// Check nonce carepoint_email_article
-		
+
 		if(wp_verify_nonce( $_POST['nonce'], 'cp_ea_nonce'))
 		{
 			$this->process_article();
 		}
 		else
 		{
-			$this->message_type = 'error';
+				$this->message_type = 'error';
 		    $this->message = 'Heeeey! Why is you tryin hmmmmmmmm?';
-		    $this->response_message();			
+		    $this->response_message();
 		}
 	}
 
@@ -41,7 +41,7 @@ class emailArticle
 	 *
 	 * 	@param object $post WP_Post Object
 	 * 	returns nothing
-	 * 
+	 *
 	 */
 
 	function process_article()
@@ -68,8 +68,8 @@ class emailArticle
 		} else {
 
 			// Get the article data
-			$this->post = get_post($validated_data['post_id'], OBJECT, 'edit'); 
-			
+			$this->post = get_post($validated_data['post_id'], OBJECT, 'edit');
+
 			//build the html
 			$email_html = $this->build_html();
 
@@ -77,13 +77,13 @@ class emailArticle
 			if($this->send_email($validated_data['email']))
 			{
 				$this->message_type = 'success';
-			    $this->message = 'The article link has been emailed';				
+			    $this->message = 'The article link has been emailed';
 			}
 			else
 			{
 				$this->message_type = 'error';
-			    $this->message = 'The article has not been sent. Please try again';				
-			} 
+			    $this->message = 'The article has not been sent. Please try again';
+			}
 		}
 
 		// Finally send the response to user
@@ -97,7 +97,7 @@ class emailArticle
 	 *
 	 * 	@param object $this->post WP_Post Object
 	 * 	returns HTML Email string
-	 * 
+	 *
 	 */
 
 	private function send_email($email)
@@ -120,7 +120,7 @@ class emailArticle
 	 *
 	 * 	@param object $this->post WP_Post Object
 	 * 	returns HTML Email string
-	 * 
+	 *
 	 */
 
 	private function build_html()
@@ -136,7 +136,7 @@ class emailArticle
 		}
 		require_once CPT_PLUGIN_DIR . 'views/email-article-html.php';
 	}
-	
+
 	/**
 	 *
 	 *	Sends back a JSON response to the email form
@@ -144,7 +144,7 @@ class emailArticle
 	 * 	@param str $this->message Alert message for user
 	 * 	@param str $this->message_type ID Type of message error | success
 	 * 	returns JSON object
-	 * 
+	 *
 	 */
 
 	private function response_message()
@@ -155,7 +155,7 @@ class emailArticle
 			);
 
 		echo json_encode($result);
-		die();		
+		die();
 	}
 
 	/**
@@ -165,7 +165,7 @@ class emailArticle
 	 *
 	 * 	@param int $post_id Post id
 	 * 	returns string the excerpt
-	 * 
+	 *
 	 */
 
 	function get_excerpt_by_id($post_id){
@@ -189,7 +189,7 @@ add_action('wp_ajax_nopriv_email_article', 'carepoint_email_article');
 
 function carepoint_email_article()
 {
-	$emailArticle = new emailArticle;	
+	$emailArticle = new emailArticle;
 }
 
 function cp_emailarticle_button()
@@ -219,5 +219,5 @@ EOT;
 
     echo $html;
 }
-	
+
 }
